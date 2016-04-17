@@ -1,0 +1,624 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="多线程标签," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="iOS中的多线程技术主要有NSThread, GCD和NSOperation。他们的封装层次依次递增，其中: NSOperation 是基于GCD封装的NSObject对象，对于复杂的多线程项目使用比较方便，主要基于队列使用.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="多线程之NSOperation">
+<meta property="og:url" content="http://yoursite.com/2016/04/09/多线程之NSOperation/index.html">
+<meta property="og:site_name" content="SunnyLinSD Blog">
+<meta property="og:description" content="iOS中的多线程技术主要有NSThread, GCD和NSOperation。他们的封装层次依次递增，其中: NSOperation 是基于GCD封装的NSObject对象，对于复杂的多线程项目使用比较方便，主要基于队列使用.">
+<meta property="og:updated_time" content="2016-04-17T07:07:08.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="多线程之NSOperation">
+<meta name="twitter:description" content="iOS中的多线程技术主要有NSThread, GCD和NSOperation。他们的封装层次依次递增，其中: NSOperation 是基于GCD封装的NSObject对象，对于复杂的多线程项目使用比较方便，主要基于队列使用.">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 多线程之NSOperation | SunnyLinSD Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">SunnyLinSD Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-categories,tags " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                多线程之NSOperation
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-09T20:19:37+08:00" content="2016-04-09">
+              2016-04-09
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/多线程/" itemprop="url" rel="index">
+                    <span itemprop="name">多线程</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<h4 id="iOS中的多线程技术主要有NSThread-GCD和NSOperation。他们的封装层次依次递增，其中-NSOperation-是基于GCD封装的NSObject对象，对于复杂的多线程项目使用比较方便，主要基于队列使用"><a href="#iOS中的多线程技术主要有NSThread-GCD和NSOperation。他们的封装层次依次递增，其中-NSOperation-是基于GCD封装的NSObject对象，对于复杂的多线程项目使用比较方便，主要基于队列使用" class="headerlink" title="iOS中的多线程技术主要有NSThread, GCD和NSOperation。他们的封装层次依次递增，其中: NSOperation 是基于GCD封装的NSObject对象，对于复杂的多线程项目使用比较方便，主要基于队列使用."></a>iOS中的多线程技术主要有NSThread, GCD和NSOperation。他们的封装层次依次递增，其中: <code>NSOperation</code> 是基于GCD封装的NSObject对象，对于复杂的多线程项目使用比较方便，主要基于队列使用.</h4><hr>
+<a id="more"></a>
+<h2 id="NSOperation的作用"><a href="#NSOperation的作用" class="headerlink" title="NSOperation的作用 :"></a>NSOperation的作用 :</h2><p>配合使用 <code>NSOperation</code> 和 <code>NSOperationQueue</code> 也能实现多线程编程,实现多线程的具体步骤 :<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span>先将需要执行的操作封装到一个 `<span class="built_in">NSOperation</span>` 对象中</span><br><span class="line"><span class="number">2.</span>然后将 `<span class="built_in">NSOperation</span>` 对象添加到`<span class="built_in">NSOperationQueue</span>中`</span><br><span class="line"><span class="number">3.</span>系统会自动将 `<span class="built_in">NSOperationQueue</span>` 中的 `<span class="built_in">NSOperation</span>` 取出来</span><br><span class="line"><span class="number">4.</span>将取出的 `<span class="built_in">NSOperation</span>` 封装的操作放到一条新线程中执行</span><br></pre></td></tr></table></figure></p>
+<p>NSOperation是个抽象类，并不具备封装操作的能力，必须使用它的子类 ,使用NSOperation子类的方式有3种 :<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSInvocationOperation</span></span><br><span class="line"><span class="built_in">NSBlockOperation</span></span><br><span class="line">自定义子类继承 <span class="built_in">NSOperation</span>，实现内部相应的方法</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="NSInvocationOperation"><a href="#NSInvocationOperation" class="headerlink" title="NSInvocationOperation"></a><span id="NSInvocationOperation">NSInvocationOperation</span></h2><p>创建 <code>NSInvocationOperation</code> 对象,第一个方法的使用方法跟 <code>NSThread</code> 类似,所以就不多说明了,第二个方法需要我们传入一个 <code>NSInvocation</code> 对象,通过这个对象来初始化创建一个 <code>NSInvocationOperation</code></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (nullable instancetype)initWithTarget:(<span class="keyword">id</span>)target selector:(SEL)sel object:(nullable <span class="keyword">id</span>)arg;</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (instancetype)initWithInvocation:(<span class="built_in">NSInvocation</span> *)inv;</span><br></pre></td></tr></table></figure>
+<p>开启操作 ,当调用了 <code>start</code> 方法之后,就会调用 <code>NSInvocationOperation</code> 中我们设置好的方法,默认情况下，调用了start方法后并不会开一条新线程去执行操作，而是在当前线程同步执行操作,只有将NSOperation放到一个NSOperationQueue中，才会异步执行操作.</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)start;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="NSBlockOperation"><a href="#NSBlockOperation" class="headerlink" title="NSBlockOperation"></a><span id="NSBlockOperation">NSBlockOperation</span></h2><p>创建一个 <code>NSBlockOperation</code> 对象,该方法中,只需要在后面的block中,写上我们希望进行的操作,就可以创建一个 <code>NSBlockOperation</code> 对象了</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ (instancetype)blockOperationWithBlock:(<span class="keyword">void</span> (^)(<span class="keyword">void</span>))block;</span><br></pre></td></tr></table></figure>
+<p>添加更多任务,同样,只需要我们在block中写上希望执行的代码,就会把该操作添加到  <code>NSBlockOperation</code>中.</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)addExecutionBlock:(<span class="keyword">void</span> (^)(<span class="keyword">void</span>))block;</span><br></pre></td></tr></table></figure>
+<p>开启操作,当调用了 <code>start</code> 方法之后,就会调用 <code>NSBlockOperation</code> 中我们设置好的block</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)start;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：只要NSBlockOperation封装的操作数 &gt; 1，就会异步执行操作</p>
+</blockquote>
+<hr>
+<h2 id="NSOperationQueue"><a href="#NSOperationQueue" class="headerlink" title=" NSOperationQueue"></a><span id="NSOperationQueue"> NSOperationQueue</span></h2><p>NSOperationQueue的作用 : NSOperation可以调用start方法来执行任务，但默认是同步执行的<br>如果将NSOperation添加到NSOperationQueue（操作队列）中，系统会自动异步执行NSOperation中的操作</p>
+<p>NSOperationQueue 中的队列 :<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">主队列 `[<span class="built_in">NSOperationQueue</span> mainQueue]`  在主队列中的任务都在主线程中执行 </span><br><span class="line">非主队列  `[[<span class="built_in">NSOperationQueue</span> alloc]init]`  同时具备了串行和并发的功能,默认是并发的</span><br></pre></td></tr></table></figure></p>
+<p>添加操作到NSOperationQueue中 : 添加到 <code>NSOperationQueue</code> 的操作,会自动调用操作的 <code>start</code> 来启动线程,第一个方法中,只需要传入一个 <code>NSOperation</code> 对象即可,相比第一个方法,第二个方法更简单,添加一个block,只需要在block中写上自己的操作<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)addOperation:(<span class="built_in">NSOperation</span> *)op;</span><br><span class="line">- (<span class="keyword">void</span>)addOperationWithBlock:(<span class="keyword">void</span> (^)(<span class="keyword">void</span>))block;</span><br></pre></td></tr></table></figure></p>
+<p>最大并发数 : 也就是同时执行的任务数,比如，同时开3个线程执行3个任务，并发数就是3,当最大并发数是 0 的时候,所有操作默认不进行,当最大并发数是1的时候,队列中的任务按照串行执行,默认是-1,也就是最大值,不受限制d</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">NSInteger</span>)maxConcurrentOperationCount;</span><br><span class="line">- (<span class="keyword">void</span>)setMaxConcurrentOperationCount:(<span class="built_in">NSInteger</span>)cnt;</span><br></pre></td></tr></table></figure>
+<p>暂停操作&amp;取消队列所有操作,在 <code>NSOperationQueue</code> 中提供了暂停任务的属性与取消队列所有操作的方法</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 暂停&amp;恢复操作</span></span><br><span class="line"><span class="keyword">@property</span> (getter=isSuspended) <span class="built_in">BOOL</span> suspended;</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 取消队列所有操作</span></span><br><span class="line">- (<span class="keyword">void</span>)cancelAllOperations;</span><br></pre></td></tr></table></figure>
+<p>当 <code>suspended</code> 属性设置为 <code>YES</code> 时,任务将会被暂停, <code>NO</code> 时将会被重新开启 , 暂停表示不继续执行队列中的下一个任务,但是当前正在执行的任务是仍然得先执行完才会停的.使用了 <code>cancelAllOperations</code> 方法取消操作之后，当前正在执行的操作的下一个操作将不再执行，而且永远都不在执行，就像后面的所有任务都从队列里面移除了一样,取消操作是不可以恢复的,该方法的原理就是 <code>通过- (BOOL)isCancelled方法检测操作是否被取消，对取消做出响应</code></p>
+<blockquote>
+<p>但我们自定义一个 <code>NSOperation</code> 时,若在 main 方法中我们有多个任务,并且我们希望当外界设置了取消方法,当前操作能被取消并且停止.苹果官方建议，每当执行完一次耗时操作之后，就查看一下当前队列是否为取消状态，如果是，那么就直接退出,好处是可以提高程序的性能</p>
+</blockquote>
+<p>操作的监听 : 可以监听一个操作的执行完毕<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span> (^)(<span class="keyword">void</span>))completionBlock;</span><br><span class="line">- (<span class="keyword">void</span>)setCompletionBlock:(<span class="keyword">void</span> (^)(<span class="keyword">void</span>))block;</span><br></pre></td></tr></table></figure></p>
+<p>操作的依赖 : NSOperation之间可以设置依赖来保证执行顺序,可以在不同queue的NSOperation之间创建依赖关系 (注意：不能相互依赖,比如A依赖B，B依赖A)<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// [operationB addDependency:operationA],操作A执行完后，才能执行操作B</span></span><br><span class="line">- (<span class="keyword">void</span>)addDependency:(<span class="built_in">NSOperation</span> *)op;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/多线程标签/" rel="tag">#多线程标签</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/09/多线程之GCD/" rel="next" title="多线程之GCD">
+                <i class="fa fa-chevron-left"></i> 多线程之GCD
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/04/09/Runloop学习/" rel="prev" title="Runloop 学习">
+                Runloop 学习 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="SunnyLinSD" />
+          <p class="site-author-name" itemprop="name">SunnyLinSD</p>
+          <p class="site-description motion-element" itemprop="description">一件事明明可以做到极致,为什么要止步于过得去呢?</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#iOS中的多线程技术主要有NSThread-GCD和NSOperation。他们的封装层次依次递增，其中-NSOperation-是基于GCD封装的NSObject对象，对于复杂的多线程项目使用比较方便，主要基于队列使用"><span class="nav-number">1.</span> <span class="nav-text">iOS中的多线程技术主要有NSThread, GCD和NSOperation。他们的封装层次依次递增，其中: NSOperation 是基于GCD封装的NSObject对象，对于复杂的多线程项目使用比较方便，主要基于队列使用.</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NSOperation的作用"><span class="nav-number"></span> <span class="nav-text">NSOperation的作用 :</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NSInvocationOperation"><span class="nav-number"></span> <span class="nav-text">NSInvocationOperation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NSBlockOperation"><span class="nav-number"></span> <span class="nav-text">NSBlockOperation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NSOperationQueue"><span class="nav-number"></span> <span class="nav-text"> NSOperationQueue</span></a></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">SunnyLinSD</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

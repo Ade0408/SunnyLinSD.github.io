@@ -1,0 +1,641 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="多线程标签," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="iOS中的多线程技术主要有NSThread, GCD和NSOperation。他们的封装层次依次递增，其中 NSThread 封装性最差，最偏向于底层，主要基于thread使用.一个 NSThread 对象就等于一条线程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="多线程之NSThread">
+<meta property="og:url" content="http://yoursite.com/2016/04/08/多线程之NSThread/index.html">
+<meta property="og:site_name" content="SunnyLinSD Blog">
+<meta property="og:description" content="iOS中的多线程技术主要有NSThread, GCD和NSOperation。他们的封装层次依次递增，其中 NSThread 封装性最差，最偏向于底层，主要基于thread使用.一个 NSThread 对象就等于一条线程">
+<meta property="og:updated_time" content="2016-04-17T07:51:49.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="多线程之NSThread">
+<meta name="twitter:description" content="iOS中的多线程技术主要有NSThread, GCD和NSOperation。他们的封装层次依次递增，其中 NSThread 封装性最差，最偏向于底层，主要基于thread使用.一个 NSThread 对象就等于一条线程">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 多线程之NSThread | SunnyLinSD Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">SunnyLinSD Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                多线程之NSThread
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-08T15:30:53+08:00" content="2016-04-08">
+              2016-04-08
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/多线程/" itemprop="url" rel="index">
+                    <span itemprop="name">多线程</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<h4 id="iOS中的多线程技术主要有NSThread-GCD和NSOperation。他们的封装层次依次递增，其中-NSThread-封装性最差，最偏向于底层，主要基于thread使用-一个-NSThread-对象就等于一条线程"><a href="#iOS中的多线程技术主要有NSThread-GCD和NSOperation。他们的封装层次依次递增，其中-NSThread-封装性最差，最偏向于底层，主要基于thread使用-一个-NSThread-对象就等于一条线程" class="headerlink" title="iOS中的多线程技术主要有NSThread, GCD和NSOperation。他们的封装层次依次递增，其中 NSThread 封装性最差，最偏向于底层，主要基于thread使用.一个 NSThread 对象就等于一条线程"></a>iOS中的多线程技术主要有NSThread, GCD和NSOperation。他们的封装层次依次递增，其中 <code>NSThread</code> 封装性最差，最偏向于底层，<code>主要基于thread使用</code>.一个 <code>NSThread</code> 对象就等于一条线程</h4><hr>
+<a id="more"></a>
+<h2 id="NSThread-创建"><a href="#NSThread-创建" class="headerlink" title="NSThread 创建"></a><span id="NSThread 创建">NSThread 创建</span></h2><p>线程创建, 对于NSThread来说，每一个对象就代表着一个线程，NSThread提供了2种创建线程的方法,detach方法直接创建并启动一个线程去Selector，由于没有返回值，如果需要获取新创建的Thread，需要在执行的Selector中调用 <code>-[NSThread currentThread]</code> 获取</p>
+  <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="keyword">void</span>)detachNewThreadSelector:(SEL)selector toTarget:(<span class="keyword">id</span>)target withObject:(nullable <span class="keyword">id</span>)argument;</span><br></pre></td></tr></table></figure>
+<p>init方法初始化线程并返回，线程的入口函数由Selector传入。线程创建出来之后需要手动调用-start方法启动</p>
+  <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (instancetype)initWithTarget:(<span class="keyword">id</span>)target selector:(SEL)selector object:(nullable <span class="keyword">id</span>)argument;</span><br></pre></td></tr></table></figure>
+<p>隐式创建并启动线程</p>
+  <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="keyword">self</span> performSelectorInBackground:<span class="keyword">@selector</span>(run) withObject:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="NSThread-操作"><a href="#NSThread-操作" class="headerlink" title="NSThread 操作"></a><span id="NSThread 操作">NSThread 操作</span></h2><p>NSThread给线程提供的主要操作方法有启动，睡眠，取消，退出</p>
+<p>启动 : 当我们使用 <code>init</code> 方法创建线程出来,线程并不会马上开启,只有我们手动调用 <code>start</code> 方法,才会启动线程</p>
+  <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 线程一启动，就会在线程thread中执行self的run方法</span></span><br><span class="line">[thread start];</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p> 备注 : 部分线程属性需要在启动前设置，线程启动之后再设置会无效。如qualityOfService属性</p>
+</blockquote>
+<p>睡眠 : NSThread提供了2个让线程睡眠的方法，一个是根据NSDate传入睡眠时间，一个是直接传入NSTimeInterval</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 根据NSDate传入睡眠时间</span></span><br><span class="line">+ (<span class="keyword">void</span>)sleepUntilDate:(<span class="built_in">NSDate</span> *)date;</span><br><span class="line">  </span><br><span class="line"><span class="comment">// 直接传入睡眠多久</span></span><br><span class="line">+ (<span class="keyword">void</span>)sleepForTimeInterval:(<span class="built_in">NSTimeInterval</span>)ti;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>sleepUntilDate</code> :相当于执行一个sleep的任务。在执行过程中，即使有其他任务传入runloop，runloop也不会立即响应，必须sleep任务完成之后，才会响应其他任务</p>
+</blockquote>
+<p>取消 : 对于线程的取消，NSThread提供了一个取消的方法和一个属性</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 属性</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">readonly</span>, getter=isCancelled) <span class="built_in">BOOL</span> cancelled;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 取消的方法</span></span><br><span class="line">- (<span class="keyword">void</span>)cancel;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>但是当调用-cancel方法并不会立刻取消线程，它仅仅是将cancelled属性设置为YES。cancelled也仅仅是一个用于记录状态的属性。线程取消的功能需要我们在main函数中自己实现<br>要实现取消的功能，我们需要自己在线程的main函数中定期检查isCancelled状态来判断线程是否需要退出，当isCancelled为YES的时候，我们手动退出。如果我们没有在main函数中检查isCancelled状态，那么调用-cancel将没有任何意义</p>
+</blockquote>
+<p>退出 : 与充满不确定性的-cancel相比，-exit函数可以让线程立即退出</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="keyword">void</span>)exit;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>-exit</code> 属于核弹级别终极API，调用之后会立即终止线程，即使任务还没有执行完成也会中断。这就非常有可能导致内存泄露等严重问题，所以一般不推荐使用</p>
+</blockquote>
+<hr>
+<h2 id="线程通讯"><a href="#线程通讯" class="headerlink" title="线程通讯"></a><span id="线程通讯">线程通讯</span></h2><p>线程准备好之后，经常需要从主线程把耗时的任务丢给辅助线程，当任务完成之后辅助线程再把结果传回主线程传，这些线程通讯一般用的都是perform方法</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//将selector丢给主线程执行，可以指定runloop mode</span></span><br><span class="line">- (<span class="keyword">void</span>)performSelectorOnMainThread:(SEL)aSelector withObject:(nullable <span class="keyword">id</span>)arg waitUntilDone:(<span class="built_in">BOOL</span>)wait modes:(nullable <span class="built_in">NSArray</span>&lt;<span class="built_in">NSString</span> *&gt; *)array; </span><br><span class="line"></span><br><span class="line"><span class="comment">// 将selector丢给主线程执行，runloop mode默认为common mode</span></span><br><span class="line">- (<span class="keyword">void</span>)performSelectorOnMainThread:(SEL)aSelector withObject:(nullable <span class="keyword">id</span>)arg waitUntilDone:(<span class="built_in">BOOL</span>)wait; </span><br><span class="line"></span><br><span class="line"><span class="comment">// 将selector丢个指定线程执行，可以指定runloop mode</span></span><br><span class="line">- (<span class="keyword">void</span>)performSelector:(SEL)aSelector onThread:(<span class="built_in">NSThread</span> *)thr withObject:(nullable <span class="keyword">id</span>)arg waitUntilDone:(<span class="built_in">BOOL</span>)wait modes:(nullable <span class="built_in">NSArray</span>&lt;<span class="built_in">NSString</span> *&gt; *)array;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 将selector丢个指定线程执行，runloop mode默认为default mode</span></span><br><span class="line">- (<span class="keyword">void</span>)performSelector:(SEL)aSelector onThread:(<span class="built_in">NSThread</span> *)thr withObject:(nullable <span class="keyword">id</span>)arg waitUntilDone:(<span class="built_in">BOOL</span>)wait;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>perform方法只对拥有runloop的线程有效，如果创建的线程没有添加runloop，perform的selector将无法执行</p>
+</blockquote>
+<hr>
+<h2 id="线程优先级"><a href="#线程优先级" class="headerlink" title="线程优先级"></a><span id="线程优先级">线程优先级</span></h2><p>每个线程的紧急程度是不一样的，有的线程中任务你也许希望尽快执行，有的线程中任务也许并不是那么紧急，所以线程需要有优先级。优先级高线程中的任务会比优先级低的线程先执行</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取当前优先级</span></span><br><span class="line">+ (<span class="keyword">double</span>)threadPriority;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置当前优先级</span></span><br><span class="line">+ (<span class="built_in">BOOL</span>)setThreadPriority:(<span class="keyword">double</span>)p;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 优先级属性,可以通过对象进行设置和获取 </span></span><br><span class="line"><span class="keyword">@property</span> <span class="keyword">double</span> threadPriority;</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="built_in">NS_ENUM</span>(<span class="built_in">NSInteger</span>, <span class="built_in">NSQualityOfService</span>) &#123;</span><br><span class="line">    <span class="built_in">NSQualityOfServiceUserInteractive</span> = <span class="number">0x21</span>,</span><br><span class="line">    <span class="built_in">NSQualityOfServiceUserInitiated</span> = <span class="number">0x19</span>,</span><br><span class="line">    <span class="built_in">NSQualityOfServiceDefault</span> = <span class="number">-1</span></span><br><span class="line">    <span class="built_in">NSQualityOfServiceUtility</span> = <span class="number">0x11</span>,</span><br><span class="line">    <span class="built_in">NSQualityOfServiceBackground</span> = <span class="number">0x09</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>优先级枚举(一般主线程和没有设置优先级的线程都是默认优先级) :<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 优先级枚举</span></span><br><span class="line"><span class="keyword">@property</span> <span class="built_in">NSQualityOfService</span> qualityOfService;</span><br></pre></td></tr></table></figure></p>
+<p>NSQualityOfService主要有5个枚举值，优先级别从高到低排布：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">* <span class="built_in">NSQualityOfServiceUserInteractive</span>：最高优先级，主要用于提供交互UI的操作，比如处理点击事件，绘制图像到屏幕上</span><br><span class="line">* <span class="built_in">NSQualityOfServiceUserInitiated</span>：次高优先级，主要用于执行需要立即返回的任务</span><br><span class="line">* <span class="built_in">NSQualityOfServiceDefault</span>：默认优先级，当没有设置优先级的时候，线程默认优先级</span><br><span class="line">* <span class="built_in">NSQualityOfServiceUtility</span>：普通优先级，主要用于不需要立即返回的任务</span><br><span class="line">* <span class="built_in">NSQualityOfServiceBackground</span>：后台优先级，用于完全不紧急的任务</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="主线程和当前线程"><a href="#主线程和当前线程" class="headerlink" title="主线程和当前线程"></a><span id="主线程和当前线程">主线程和当前线程</span></h2><p>NSThread也提供了非常方便的获取和判断主线程的API<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="built_in">NSThread</span> *)mainThread; <span class="comment">// 获得主线程</span></span><br><span class="line">- (<span class="built_in">BOOL</span>)isMainThread; <span class="comment">// 是否为主线程</span></span><br><span class="line">+ (<span class="built_in">BOOL</span>)isMainThread; <span class="comment">// 是否为主线程</span></span><br></pre></td></tr></table></figure></p>
+<p>获得当前线程<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSThread</span> *current = [<span class="built_in">NSThread</span> currentThread];</span><br></pre></td></tr></table></figure></p>
+<p>线程的名字<br>  <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)setName:(<span class="built_in">NSString</span> *)n;</span><br><span class="line">- (<span class="built_in">NSString</span> *)name;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="线程通知"><a href="#线程通知" class="headerlink" title="线程通知"></a><span id="线程通知">线程通知</span></h2><p>NSThread有三个线程相关的通知 : </p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSString</span> * <span class="keyword">const</span> <span class="built_in">NSWillBecomeMultiThreadedNotification</span>;</span><br><span class="line"><span class="built_in">NSString</span> * <span class="keyword">const</span> <span class="built_in">NSDidBecomeSingleThreadedNotification</span>;</span><br><span class="line"><span class="built_in">NSString</span> * <span class="keyword">const</span> <span class="built_in">NSThreadWillExitNotification</span>;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>NSWillBecomeMultiThreadedNotification：由当前线程派生出第一个其他线程时发送，一般一个线程只发送一次<br>NSDidBecomeSingleThreadedNotification：这个通知目前没有实际意义，可以忽略<br>NSThreadWillExitNotification: 线程退出之前发送这个通知</p>
+</blockquote>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/多线程标签/" rel="tag">#多线程标签</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/03/网络编程学习/" rel="next" title="网络编程学习">
+                <i class="fa fa-chevron-left"></i> 网络编程学习
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/04/09/多线程之GCD/" rel="prev" title="多线程之GCD">
+                多线程之GCD <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="SunnyLinSD" />
+          <p class="site-author-name" itemprop="name">SunnyLinSD</p>
+          <p class="site-description motion-element" itemprop="description">一件事明明可以做到极致,为什么要止步于过得去呢?</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#iOS中的多线程技术主要有NSThread-GCD和NSOperation。他们的封装层次依次递增，其中-NSThread-封装性最差，最偏向于底层，主要基于thread使用-一个-NSThread-对象就等于一条线程"><span class="nav-number">1.</span> <span class="nav-text">iOS中的多线程技术主要有NSThread, GCD和NSOperation。他们的封装层次依次递增，其中 NSThread 封装性最差，最偏向于底层，主要基于thread使用.一个 NSThread 对象就等于一条线程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NSThread-创建"><span class="nav-number"></span> <span class="nav-text">NSThread 创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NSThread-操作"><span class="nav-number"></span> <span class="nav-text">NSThread 操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程通讯"><span class="nav-number"></span> <span class="nav-text">线程通讯</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程优先级"><span class="nav-number"></span> <span class="nav-text">线程优先级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主线程和当前线程"><span class="nav-number"></span> <span class="nav-text">主线程和当前线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程通知"><span class="nav-number"></span> <span class="nav-text">线程通知</span></a></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">SunnyLinSD</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

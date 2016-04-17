@@ -1,0 +1,807 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="时间," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="本文是我对iOS中的时间操作的一些记录">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS中关于时间操作">
+<meta property="og:url" content="http://yoursite.com/2016/04/15/iOS中关于时间操作/index.html">
+<meta property="og:site_name" content="SunnyLinSD Blog">
+<meta property="og:description" content="本文是我对iOS中的时间操作的一些记录">
+<meta property="og:updated_time" content="2016-04-17T08:11:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS中关于时间操作">
+<meta name="twitter:description" content="本文是我对iOS中的时间操作的一些记录">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> iOS中关于时间操作 | SunnyLinSD Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">SunnyLinSD Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                iOS中关于时间操作
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-15T12:43:59+08:00" content="2016-04-15">
+              2016-04-15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/时间操作/" itemprop="url" rel="index">
+                    <span itemprop="name">时间操作</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<h4 id="本文是我对iOS中的时间操作的一些记录"><a href="#本文是我对iOS中的时间操作的一些记录" class="headerlink" title="本文是我对iOS中的时间操作的一些记录"></a>本文是我对iOS中的时间操作的一些记录</h4><hr>
+<a id="more"></a>
+<h2 id="日期格式化知识"><a href="#日期格式化知识" class="headerlink" title="日期格式化知识"></a>日期格式化知识</h2><p>iOS中对日期的操作需要经常使用到格式化符,若每次用到都得查的话,非常麻烦,故把它全部进行整理,方便以后用时直接看就好了</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">字母</th>
+<th style="text-align:center">日期或时间元素</th>
+<th style="text-align:center">表示</th>
+<th style="text-align:center">示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">G</td>
+<td style="text-align:center">Era 标志符</td>
+<td style="text-align:center">世纪?</td>
+<td style="text-align:center">暂时没有接触过</td>
+</tr>
+<tr>
+<td style="text-align:center">y</td>
+<td style="text-align:center">年</td>
+<td style="text-align:center">Year</td>
+<td style="text-align:center">1996,96</td>
+</tr>
+<tr>
+<td style="text-align:center">M</td>
+<td style="text-align:center">年中的月份</td>
+<td style="text-align:center">Month</td>
+<td style="text-align:center">July; Jul; 07</td>
+</tr>
+<tr>
+<td style="text-align:center">w</td>
+<td style="text-align:center">年中的周数</td>
+<td style="text-align:center">Number</td>
+<td style="text-align:center">27</td>
+</tr>
+<tr>
+<td style="text-align:center">W</td>
+<td style="text-align:center">月份中的周数</td>
+<td style="text-align:center">Number</td>
+<td style="text-align:center">2</td>
+</tr>
+<tr>
+<td style="text-align:center">D</td>
+<td style="text-align:center">年中的天数</td>
+<td style="text-align:center">Number</td>
+<td style="text-align:center">189</td>
+</tr>
+<tr>
+<td style="text-align:center">d</td>
+<td style="text-align:center">月份中的天数</td>
+<td style="text-align:center">Number</td>
+<td style="text-align:center">10</td>
+</tr>
+<tr>
+<td style="text-align:center">F</td>
+<td style="text-align:center">月份中的星期</td>
+<td style="text-align:center">Number</td>
+<td style="text-align:center">2</td>
+</tr>
+<tr>
+<td style="text-align:center">E</td>
+<td style="text-align:center">星期中的天数</td>
+<td style="text-align:center">Text</td>
+<td style="text-align:center">Tuesday; Tue</td>
+</tr>
+<tr>
+<td style="text-align:center">a</td>
+<td style="text-align:center">Am/pm 标记</td>
+<td style="text-align:center">Text</td>
+<td style="text-align:center">PM</td>
+</tr>
+<tr>
+<td style="text-align:center">H</td>
+<td style="text-align:center">一天中的小时数（0-23）</td>
+<td style="text-align:center">Number</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">k</td>
+<td style="text-align:center">一天中的小时数（1-24)</td>
+<td style="text-align:center">Number</td>
+<td style="text-align:center">24</td>
+</tr>
+<tr>
+<td style="text-align:center">K</td>
+<td style="text-align:center">am/pm 中的小时数（0-11）</td>
+<td style="text-align:center">Number</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">h</td>
+<td style="text-align:center">am/pm 中的小时数（1-12）</td>
+<td style="text-align:center">Number</td>
+<td style="text-align:center">12</td>
+</tr>
+<tr>
+<td style="text-align:center">m</td>
+<td style="text-align:center">小时中的分钟数</td>
+<td style="text-align:center">Number</td>
+<td style="text-align:center">3</td>
+</tr>
+<tr>
+<td style="text-align:center">s</td>
+<td style="text-align:center">分钟中的秒数</td>
+<td style="text-align:center">Number</td>
+<td style="text-align:center">55</td>
+</tr>
+<tr>
+<td style="text-align:center">S</td>
+<td style="text-align:center">毫秒数</td>
+<td style="text-align:center">Number</td>
+<td style="text-align:center">978</td>
+</tr>
+<tr>
+<td style="text-align:center">z</td>
+<td style="text-align:center">时区</td>
+<td style="text-align:center">General time zone</td>
+<td style="text-align:center">Pacific Standard Time; PST; GMT-08:00</td>
+</tr>
+<tr>
+<td style="text-align:center">Z</td>
+<td style="text-align:center">时区</td>
+<td style="text-align:center">RFC 822 time zone</td>
+<td style="text-align:center">-0800</td>
+</tr>
+</tbody>
+</table>
+<p>示例</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">日期和时间模式</th>
+<th style="text-align:center">结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">“yyyy.MM.dd G ‘at’ HH:mm:ss z”</td>
+<td style="text-align:center">2001.07.04 AD at 12:08:56 PDT</td>
+</tr>
+<tr>
+<td style="text-align:center">“EEE, MMM d, ‘’yy”</td>
+<td style="text-align:center">Wed, Jul 4, ‘01</td>
+</tr>
+<tr>
+<td style="text-align:center">“h:mm a”</td>
+<td style="text-align:center">12:08 PM</td>
+</tr>
+<tr>
+<td style="text-align:center">“hh ‘o’’clock’ a, zzzz”</td>
+<td style="text-align:center">12 o’clock PM, Pacific Daylight Time</td>
+</tr>
+<tr>
+<td style="text-align:center">“K:mm a, z”</td>
+<td style="text-align:center">0:08 PM, PDT</td>
+</tr>
+<tr>
+<td style="text-align:center">“yyyyy.MMMMM.dd GGG hh:mm aaa”</td>
+<td style="text-align:center">02001.July.04 AD 12:08 PM</td>
+</tr>
+<tr>
+<td style="text-align:center">“EEE, d MMM yyyy HH:mm:ss Z”</td>
+<td style="text-align:center">Wed, 4 Jul 2001 12:08:56 -0700</td>
+</tr>
+<tr>
+<td style="text-align:center">“yyMMddHHmmssZ”</td>
+<td style="text-align:center">010704120856-0700</td>
+</tr>
+<tr>
+<td style="text-align:center">“yyyy-MM-dd’T’HH:mm:ss.SSSZ”</td>
+<td style="text-align:center">2001-07-04T12:08:56.235-0700</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="字符串日期转成日期"><a href="#字符串日期转成日期" class="headerlink" title="字符串日期转成日期"></a>字符串日期转成日期</h2><ul>
+<li>在iOS开发中,我们经常需要将服务器传给我们的字符串格式的日期转成iOS上的 <code>NSDate</code> 类型的对象,方便我们对其操作.</li>
+<li><p>但是在iOS中我们无法直接将字符串格式的日期转成 <code>NSDate</code> 类型的对象,必须通过一个 <code>NSDateFormatter</code> 类将字符串格式化好,才能转成 <code>NSDate</code> 类型的对象</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSString</span> *string = <span class="string">@"2015-04-11 13:24:16"</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">NSDateFormatter</span> *fmt = [[<span class="built_in">NSDateFormatter</span> alloc] init];</span><br><span class="line">fmt.dateFormat = <span class="string">@"yyyy-MM-dd HH:mm:ss"</span>;</span><br><span class="line">[fmt setTimeZone:[<span class="built_in">NSTimeZone</span> timeZoneForSecondsFromGMT:<span class="number">8</span>]];</span><br><span class="line"></span><br><span class="line"><span class="built_in">NSDate</span> *date = [fmt dateFromString:string];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>其他类型的时间转发,这里举一个国外比较常用的字符串日期格式举例,在这里需要对时区进行设置,要不然转出来是一个空的字符</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSString</span> *string = <span class="string">@"Tue May 31 17:47:18 +800 2011"</span>;</span><br><span class="line">  </span><br><span class="line"><span class="built_in">NSDateFormatter</span> *fmt = [[<span class="built_in">NSDateFormatter</span> alloc] init];</span><br><span class="line">fmt.dateFormat = <span class="string">@"EEE MMM dd HH:mm:ss Z yyyy"</span>;</span><br><span class="line">  </span><br><span class="line"><span class="comment">// 设置语言区域(因为这种时间是欧美常用的时区)</span></span><br><span class="line">fmt.locale = [[<span class="built_in">NSLocale</span> alloc] initWithLocaleIdentifier:<span class="string">@"en_US"</span>]; <span class="comment">// 欧美时区</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">NSDate</span> *date = [fmt dateFromString:string];</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>时间戳 : 目前很多服务器不会直接返回一个日期字符串,而是直接返回一串很长很长的数字字符串,例如 : <code>56789856789656</code>,其实这段数字我们称之为 <code>时间戳</code> ,时间戳就是指从1970年1月1日00时00分00秒开始算起,到至今有多少毫秒,iOS中也专门提供了方法给我们进行计算,不过在iOS中使用的是秒进行计算,服务器返回的是毫秒,所以要我们手动计算一下 : </p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSString</span> *string = <span class="string">@"5676567656127"</span>;</span><br><span class="line">  </span><br><span class="line"><span class="comment">// 因为在iOS中,时间戳是使用秒计算的,所以要除以1000.0</span></span><br><span class="line"><span class="built_in">NSTimeInterval</span> time = string.longLongValue / <span class="number">1000.0</span>;</span><br><span class="line">  </span><br><span class="line"><span class="comment">// 使用该方法可以直接得出时间戳指向的时间</span></span><br><span class="line"><span class="built_in">NSDate</span> *date = [<span class="built_in">NSDate</span> dateWithTimeIntervalSince1970:time];</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<h2 id="日期转成字符串日期"><a href="#日期转成字符串日期" class="headerlink" title="日期转成字符串日期"></a>日期转成字符串日期</h2><ul>
+<li><p>有时我们需要将一个日期转成字符串日期格式,然后将其设置上界面上,iOS中也给我们提供了返回,但同样的,我们也不能直接对其转换,需要通过<code>NSDateFormatter</code> 类将字符串格式化好,才能转成 <code>NSString</code> 类型的对象</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取当前时间</span></span><br><span class="line"><span class="built_in">NSDate</span> *date = [<span class="built_in">NSDate</span> date];</span><br><span class="line"></span><br><span class="line"><span class="built_in">NSDateFormatter</span> *fmt = [[<span class="built_in">NSDateFormatter</span> alloc] init];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置时间格式,不设置的话打印是空串</span></span><br><span class="line">fmt.dateFormat = <span class="string">@"yyyy-MM-dd HH:mm:ss"</span>;</span><br><span class="line">  </span><br><span class="line"><span class="comment">// 获取字符串时间,获取到的直接就是东8区的时间</span></span><br><span class="line"><span class="built_in">NSString</span> *string = [fmt stringFromDate:date];</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<h2 id="获取日期中指定元素"><a href="#获取日期中指定元素" class="headerlink" title="获取日期中指定元素"></a>获取日期中指定元素</h2><ul>
+<li><p>试想一下,在开发中,你有时需要从字符串日期取出其中的月份,或者年份,但是面对字符串操作的话,我们只能使用字符串截取的操作,这样非常不人性化,所以一般我们要进行类似的操作都是直接先把字符串日期转成日期,再进行操作 : </p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSString</span> *dateString = <span class="string">@"2016-12-25 13:14:15"</span>;</span><br><span class="line">  </span><br><span class="line"><span class="built_in">NSDateFormatter</span> *fmt = [[<span class="built_in">NSDateFormatter</span> alloc] init];</span><br><span class="line">fmt.dateFormat = <span class="string">@"yyyy-MM-dd HH:mm:ss"</span>;</span><br><span class="line">  </span><br><span class="line"><span class="comment">// 将字符串转成NSDate进行操作,一般开发中建议都这样操作</span></span><br><span class="line"><span class="built_in">NSDate</span> *date = [fmt dateFromString:dateString];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>格式化好后,这时我们需要借助一个日历类 ( <code>NSCalendar</code> ) ,它提供了可以将日期中的某个组建取出来的功能 :</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建并获取当前日历类</span></span><br><span class="line"><span class="built_in">NSCalendar</span> *calendar = [<span class="built_in">NSCalendar</span> currentCalendar];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 从当前日期中取出年,月,日</span></span><br><span class="line"><span class="comment">// NSInteger year = [calendar component:NSCalendarUnitYear fromDate:date];</span></span><br><span class="line"><span class="comment">// NSInteger month = [calendar component:NSCalendarUnitMonth fromDate:date];</span></span><br><span class="line"><span class="comment">// NSInteger day = [calendar component:NSCalendarUnitDay fromDate:date];</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 另一种从日历中取出年月日的方法</span></span><br><span class="line"><span class="built_in">NSCalendarUnit</span> unit = <span class="built_in">NSCalendarUnitDay</span> | <span class="built_in">NSCalendarUnitYear</span> | <span class="built_in">NSCalendarUnitMonth</span>;</span><br><span class="line"><span class="built_in">NSDateComponents</span> *cpt = [calendar components:unit fromDate:date];</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"%zd-%zd-%zd"</span>,cpt.year,cpt.month,cpt.day);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>[NSCalendar currentCalendar]</code> 这个方法在一些新的设备上真机运行时可能会出现崩溃,最好使用这个方法时要做系统版本判断. 较新的系统就使用这个方法替代 : <code>+ (nullable NSCalendar *)calendarWithIdentifier:(NSString *)calendarIdentifierConstant;</code> 该方法支持iOS8和之后的系统</p>
+</blockquote>
+</li>
+</ul>
+<hr>
+<h2 id="日期之间的比较"><a href="#日期之间的比较" class="headerlink" title="日期之间的比较"></a>日期之间的比较</h2><ul>
+<li>在开发中我们常常需要对两个日期进行比较,iOS中日期的比较方式也较多,这里就列举山中我们开发中可能会在不同场景下使用到的方法: </li>
+<li><p>第一种方式 : 只是比较两个时间大小,不需要知道相差几分几秒 </p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSDateFormatter</span> *fmt = [[<span class="built_in">NSDateFormatter</span> alloc] init];</span><br><span class="line">fmt.dateFormat = <span class="string">@"yyyy-MM-dd HH:mm:ss"</span>;</span><br><span class="line">  </span><br><span class="line"><span class="built_in">NSString</span> *dateString = <span class="string">@"2016-12-25 13:14:15"</span>;</span><br><span class="line"><span class="built_in">NSDate</span> *date = [fmt dateFromString:dateString];</span><br><span class="line"><span class="built_in">NSDate</span> *creatDate = [<span class="built_in">NSDate</span> date];</span><br><span class="line">  </span><br><span class="line"><span class="comment">/*</span><br><span class="line">  NSOrderedAscending = -1L,  指的是越往右越大,也就是升序</span><br><span class="line">  NSOrderedSame,             指两个数之间大小是一样的</span><br><span class="line">  NSOrderedDescending        指的是越往右越小,也就是降序</span><br><span class="line">*/</span></span><br><span class="line"><span class="built_in">NSComparisonResult</span> result = [date compare:creatDate];</span><br><span class="line"><span class="keyword">if</span> (result == <span class="built_in">NSOrderedAscending</span>) <span class="built_in">NSLog</span>(<span class="string">@"date &lt; creatDate"</span>);  <span class="comment">// 升序</span></span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (result == <span class="built_in">NSOrderedDescending</span>) <span class="built_in">NSLog</span>(<span class="string">@"date &gt; creatDate"</span>);<span class="comment">// 降序</span></span><br><span class="line"><span class="keyword">else</span> <span class="built_in">NSLog</span>(<span class="string">@"相等"</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>第二种方式 : 直接获取到两个日期之间相差几秒,我这里就直接使用和当前时间做比较,假如被比较的日期比要比较的日期大,得出的结果会是负数,用fabs()转成正数即可使用 : </p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSDateFormatter</span> *fmt = [[<span class="built_in">NSDateFormatter</span> alloc] init];</span><br><span class="line">fmt.dateFormat = <span class="string">@"yyyy-MM-dd HH:mm:ss"</span>;</span><br><span class="line">  </span><br><span class="line"><span class="built_in">NSString</span> *dateString = <span class="string">@"2016-04-14 13:14:15"</span>;</span><br><span class="line"><span class="built_in">NSDate</span> *date = [fmt dateFromString:dateString];</span><br><span class="line">  </span><br><span class="line"><span class="comment">// 从@"2016-04-14 13:14:15" 距离当前时间差距多少秒</span></span><br><span class="line"><span class="built_in">NSTimeInterval</span> time = [date timeIntervalSinceNow];</span><br><span class="line">  </span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"%lf"</span>,time); <span class="comment">// -77190.871628 结果是负数,因为是使用一个小的值减去今天的日期(较大),所以结果是负数</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>第三种方式 : 使用日历类去比较两个时间,会自动计算出两个日期之间差距多少小时,多少分钟,多少秒 ,个人比较推荐使用这种,因为使用这种方式打印出来的结果也比较直观 : </p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSDateFormatter</span> *fmt = [[<span class="built_in">NSDateFormatter</span> alloc] init];</span><br><span class="line">fmt.dateFormat = <span class="string">@"yyyy-MM-dd HH:mm:ss"</span>;</span><br><span class="line">  </span><br><span class="line"><span class="built_in">NSString</span> *dateString = <span class="string">@"2016-04-14 13:14:15"</span>;</span><br><span class="line"><span class="built_in">NSDate</span> *date = [fmt dateFromString:dateString];</span><br><span class="line">  </span><br><span class="line"><span class="built_in">NSString</span> *otherString = <span class="string">@"2016-04-14 11:13:00"</span>;</span><br><span class="line"><span class="built_in">NSDate</span> *otherDate = [fmt dateFromString:otherString];</span><br><span class="line">  </span><br><span class="line"><span class="comment">// 创建一个日历类</span></span><br><span class="line"><span class="built_in">NSCalendar</span> *calendar ;</span><br><span class="line"><span class="keyword">if</span> ([<span class="built_in">NSCalendar</span> respondsToSelector:<span class="keyword">@selector</span>(calendarWithIdentifier:)]) &#123; <span class="comment">// 判断当前系统是否能够响应这个方法,因为这个方法是iOS8之后才支持的</span></span><br><span class="line">    calendar = [<span class="built_in">NSCalendar</span> calendarWithIdentifier:<span class="built_in">NSCalendarIdentifierGregorian</span>];</span><br><span class="line">&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">    calendar = [<span class="built_in">NSCalendar</span> currentCalendar];</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line"><span class="built_in">NSCalendarUnit</span> unit = <span class="built_in">NSCalendarUnitDay</span> | <span class="built_in">NSCalendarUnitHour</span> | <span class="built_in">NSCalendarUnitMinute</span> | k<span class="built_in">CFCalendarUnitSecond</span> | k<span class="built_in">CFCalendarUnitYear</span> | k<span class="built_in">CFCalendarUnitMonth</span>;</span><br><span class="line"><span class="built_in">NSDateComponents</span> *cpt = [calendar components:unit fromDate:date toDate:otherDate options:<span class="number">0</span>];</span><br><span class="line">  </span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,cpt);</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 打印结果 </span></span><br><span class="line">Calendar Year: <span class="number">0</span></span><br><span class="line">Month: <span class="number">0</span></span><br><span class="line">Day: <span class="number">3</span></span><br><span class="line">Hour: <span class="number">21</span></span><br><span class="line">Minute: <span class="number">58</span></span><br><span class="line">Second: <span class="number">45</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/时间/" rel="tag">#时间</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/13/OC中视图的bounds属性详解/" rel="next" title="OC中视图的bounds属性详解">
+                <i class="fa fa-chevron-left"></i> OC中视图的bounds属性详解
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="SunnyLinSD" />
+          <p class="site-author-name" itemprop="name">SunnyLinSD</p>
+          <p class="site-description motion-element" itemprop="description">一件事明明可以做到极致,为什么要止步于过得去呢?</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#本文是我对iOS中的时间操作的一些记录"><span class="nav-number">1.</span> <span class="nav-text">本文是我对iOS中的时间操作的一些记录</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日期格式化知识"><span class="nav-number"></span> <span class="nav-text">日期格式化知识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串日期转成日期"><span class="nav-number"></span> <span class="nav-text">字符串日期转成日期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日期转成字符串日期"><span class="nav-number"></span> <span class="nav-text">日期转成字符串日期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取日期中指定元素"><span class="nav-number"></span> <span class="nav-text">获取日期中指定元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日期之间的比较"><span class="nav-number"></span> <span class="nav-text">日期之间的比较</span></a></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">SunnyLinSD</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

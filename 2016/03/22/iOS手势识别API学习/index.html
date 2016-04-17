@@ -1,0 +1,629 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="API," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="在iOS中,苹果给我们提供了很多相当丰富的手势操作,而我们也只需要进行简单的调用,就可以直接使用.并且还可以监控手势状态">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS手势识别API学习">
+<meta property="og:url" content="http://yoursite.com/2016/03/22/iOS手势识别API学习/index.html">
+<meta property="og:site_name" content="SunnyLinSD Blog">
+<meta property="og:description" content="在iOS中,苹果给我们提供了很多相当丰富的手势操作,而我们也只需要进行简单的调用,就可以直接使用.并且还可以监控手势状态">
+<meta property="og:updated_time" content="2016-04-17T08:09:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS手势识别API学习">
+<meta name="twitter:description" content="在iOS中,苹果给我们提供了很多相当丰富的手势操作,而我们也只需要进行简单的调用,就可以直接使用.并且还可以监控手势状态">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> iOS手势识别API学习 | SunnyLinSD Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">SunnyLinSD Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                iOS手势识别API学习
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-22T06:32:15+08:00" content="2016-03-22">
+              2016-03-22
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/API-学习/" itemprop="url" rel="index">
+                    <span itemprop="name">API 学习</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<h4 id="在iOS中-苹果给我们提供了很多相当丰富的手势操作-而我们也只需要进行简单的调用-就可以直接使用-并且还可以监控手势状态"><a href="#在iOS中-苹果给我们提供了很多相当丰富的手势操作-而我们也只需要进行简单的调用-就可以直接使用-并且还可以监控手势状态" class="headerlink" title="在iOS中,苹果给我们提供了很多相当丰富的手势操作,而我们也只需要进行简单的调用,就可以直接使用.并且还可以监控手势状态"></a>在iOS中,苹果给我们提供了很多相当丰富的手势操作,而我们也只需要进行简单的调用,就可以直接使用.并且还可以监控手势状态</h4><hr>
+<a id="more"></a>
+<h2 id="UIGestureRecognizer-手势识别器"><a href="#UIGestureRecognizer-手势识别器" class="headerlink" title="UIGestureRecognizer 手势识别器"></a><span id="UIGestureRecognizer.h">UIGestureRecognizer 手势识别器</span></h2><blockquote>
+<p>UIGestureRecognizer 是一个抽象类,iOS中所有的手势都是它的子类 ,有以下子类 :<br><a href="#UIPanGestureRecognizer.h">UIPanGestureRecognizer.h</a> –&gt; 拖动,平移<br><a href="#UIScreenEdgePanGestureRecognizer.h">UIScreenEdgePanGestureRecognizer</a> –&gt; 屏幕边缘平移<br><a href="#UITapGestureRecognizer.h">UITapGestureRecognizer.h</a> –&gt; 轻拍<br><a href="#UISwipeGestureRecognizer.h">UISwipeGestureRecognizer.h</a> –&gt; 轻扫<br><a href="#UILongPressGestureRecognizer.h">UILongPressGestureRecognizer.h</a> –&gt; 长按<br><a href="#UIPinchGestureRecognizer.h">UIPinchGestureRecognizer.h</a> –&gt; 捏合<br><a href="#UIRotationGestureRecognizer.h">UIRotationGestureRecognizer.h</a> –&gt; 旋转<br>在iOS中监控手势的代理 : <a href="#UIGestureRecognizer Delegate">UIGestureRecognizer Delegate</a></p>
+</blockquote>
+<p>属性列表</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="built_in">NS_ENUM</span>(<span class="built_in">NSInteger</span>, <span class="built_in">UIGestureRecognizerState</span>) &#123;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">UIGestureRecognizerStatePossible</span> : <span class="comment">// 识别器尚未接识别手势, 但可能会接收到触摸时处于这个状态.这是默认的状态</span></span><br><span class="line">  <span class="built_in">UIGestureRecognizerStateBegan</span> : <span class="comment">// 识别器已经接收到了手势上的触摸识别. 该手势的动作方法将会在下个运行循环被调用</span></span><br><span class="line">  <span class="built_in">UIGestureRecognizerStateChanged</span> : <span class="comment">// 识别器已经接收到了手势发生改变的触摸识别. 该手势的动作方法将会在下个运行循环被调用</span></span><br><span class="line">  <span class="built_in">UIGestureRecognizerStateEnded</span> : <span class="comment">// 识别器已经接收到了手势发生结束的触摸识别. 该手势的动作方法将会在下个运行循环被调用并且识别器将会重新设置其状态为UIGestureRecognizerStatePossible</span></span><br><span class="line">  <span class="built_in">UIGestureRecognizerStateCancelled</span> : <span class="comment">// 识别器已经接收到了手势取消的触摸结果.该手势的动作方法将会在下个运行循环被调用并且识别器将会重新设置其状态为UIGestureRecognizerStatePossible</span></span><br><span class="line">  <span class="built_in">UIGestureRecognizerStateFailed</span> : <span class="comment">// 识别器接收到不能识别为它的手势的一系列触摸。响应方法不会被调用 并且 识别器将重置为possible状态。</span></span><br><span class="line">    <span class="comment">// 不连续的，离散的手势：识别器识别到一个独立的事件但不报告改变不变换成began和changed不能变成failed也不能变成cancelled</span></span><br><span class="line">  <span class="built_in">UIGestureRecognizerStateRecognized</span> = <span class="built_in">UIGestureRecognizerStateEnded</span> : <span class="comment">// 识别器已识别到它的手势。响应方法将在下个循环步骤中被调用 并且 识别器将重置为possible状态。  </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>,<span class="keyword">readonly</span>) <span class="built_in">UIGestureRecognizerState</span> state;</span><br><span class="line"><span class="comment">// 手势状态</span></span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>, getter=isEnabled) <span class="built_in">BOOL</span> enabled;</span><br><span class="line"><span class="comment">// 是否开启手势,默认是YES,设置为NO之后,识别器将会取消识别该其手势</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@property</span>(nullable, <span class="keyword">nonatomic</span>,<span class="keyword">readonly</span>) <span class="built_in">UIView</span> *view;           </span><br><span class="line"><span class="comment">// 视图的手势是添加上去的. 可以通过设置UIView的方法 addGestureRecognizer: method 去识别器上为视图添加一个手势</span></span><br></pre></td></tr></table></figure>
+<p>方法列表</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">- (instancetype)initWithTarget:(nullable <span class="keyword">id</span>)target action:(nullable SEL)action <span class="built_in">NS_DESIGNATED_INITIALIZER</span>;</span><br><span class="line"><span class="comment">// 给一个目标,添加一个执行了指定手势之后就会调用的方法(默认初始化构造器)</span></span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)addTarget:(<span class="keyword">id</span>)target action:(SEL)action;</span><br><span class="line"><span class="comment">// 方法功能和上面的构造方法差不多</span></span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)removeTarget:(nullable <span class="keyword">id</span>)target action:(nullable SEL)action;</span><br><span class="line"><span class="comment">// 移除对象执行手势之后就会调用的方法</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="UIPanGestureRecognizer-拖动"><a href="#UIPanGestureRecognizer-拖动" class="headerlink" title="UIPanGestureRecognizer 拖动"></a><span id="UIPanGestureRecognizer.h">UIPanGestureRecognizer 拖动</span></h2><p>父类 : <a href="#UIGestureRecognizer.h">UIGestureRecognizer.h</a></p>
+<p>属性列表</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>) <span class="built_in">NSUInteger</span> minimumNumberOfTouches;  </span><br><span class="line"><span class="comment">// 最少需要多少个手指触摸</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>) <span class="built_in">NSUInteger</span> maximumNumberOfTouches;   </span><br><span class="line"><span class="comment">// 最多能几只手指触摸</span></span><br></pre></td></tr></table></figure>
+<p>方法列表</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">CGPoint</span>)translationInView:(nullable <span class="built_in">UIView</span> *)view;</span><br><span class="line"><span class="comment">// 在指定视图中拖动设有拖动手势的View,会返回该View的新的坐标值</span></span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)setTranslation:(<span class="built_in">CGPoint</span>)translation inView:(nullable <span class="built_in">UIView</span> *)view;</span><br><span class="line"><span class="comment">// 在拖动视图时,设有拖动手势的View的translation会一直递增,为了避免出现拖动View时,View出现不受控制划出屏幕,应该在拖动完成后把该值设置为CGPointZero</span></span><br><span class="line"></span><br><span class="line">- (<span class="built_in">CGPoint</span>)velocityInView:(nullable <span class="built_in">UIView</span> *)view;                           </span><br><span class="line"><span class="comment">// 在指定坐标系统中pan gesture拖动的速度,拖动这个View的时候肯定有个速度，因此返回值就是你拖动时X和Y轴上的速度，速度是矢量，有方向</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="UIScreenEdgePanGestureRecognizer-屏幕边缘平移"><a href="#UIScreenEdgePanGestureRecognizer-屏幕边缘平移" class="headerlink" title="UIScreenEdgePanGestureRecognizer 屏幕边缘平移"></a><span id="UIScreenEdgePanGestureRecognizer.h">UIScreenEdgePanGestureRecognizer 屏幕边缘平移</span></h2><p>父类 : <a href="#UIPanGestureRecognizer.h">UIPanGestureRecognizer.h</a></p>
+<p>属性列表</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="built_in">NS_OPTIONS</span>(<span class="built_in">NSUInteger</span>, <span class="built_in">UIRectEdge</span>) &#123;</span><br><span class="line">    <span class="built_in">UIRectEdgeNone</span>   = <span class="number">0</span>,  <span class="comment">// 不允许移动</span></span><br><span class="line">    <span class="built_in">UIRectEdgeTop</span>    = <span class="number">1</span> &lt;&lt; <span class="number">0</span>,  <span class="comment">// 从顶部移动</span></span><br><span class="line">    <span class="built_in">UIRectEdgeLeft</span>   = <span class="number">1</span> &lt;&lt; <span class="number">1</span>,  <span class="comment">// 从左边移动</span></span><br><span class="line">    <span class="built_in">UIRectEdgeBottom</span> = <span class="number">1</span> &lt;&lt; <span class="number">2</span>,  <span class="comment">// 从底部移动</span></span><br><span class="line">    <span class="built_in">UIRectEdgeRight</span>  = <span class="number">1</span> &lt;&lt; <span class="number">3</span>,  <span class="comment">// 从右边移动</span></span><br><span class="line">    <span class="built_in">UIRectEdgeAll</span>    = <span class="built_in">UIRectEdgeTop</span> | <span class="built_in">UIRectEdgeLeft</span> | <span class="built_in">UIRectEdgeBottom</span> | <span class="built_in">UIRectEdgeRight</span>  <span class="comment">// 从各个方向移动</span></span><br><span class="line">&#125; <span class="built_in">NS_ENUM_AVAILABLE_IOS</span>(<span class="number">7</span>_0);</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@property</span> (<span class="keyword">readwrite</span>, <span class="keyword">nonatomic</span>, <span class="keyword">assign</span>) <span class="built_in">UIRectEdge</span> edges;</span><br><span class="line"><span class="comment">// 从屏幕上哪个位置开始移动</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="UITapGestureRecognizer-轻拍"><a href="#UITapGestureRecognizer-轻拍" class="headerlink" title="UITapGestureRecognizer 轻拍"></a><span id="UITapGestureRecognizer.h">UITapGestureRecognizer 轻拍</span></h2><p>父类 : <a href="#UIGestureRecognizer.h">UIGestureRecognizer.h</a></p>
+<p>属性列表</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>) <span class="built_in">NSUInteger</span>  numberOfTapsRequired;</span><br><span class="line"><span class="comment">// 轻拍的次数,默认是1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>) <span class="built_in">NSUInteger</span>  numberOfTouchesRequired</span><br><span class="line"><span class="comment">// 设置轻拍时手指的个数,默认是1</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="UISwipeGestureRecognizer-轻扫"><a href="#UISwipeGestureRecognizer-轻扫" class="headerlink" title="UISwipeGestureRecognizer 轻扫"></a><span id="UISwipeGestureRecognizer.h">UISwipeGestureRecognizer 轻扫</span></h2><p>父类 : <a href="#UIGestureRecognizer.h">UIGestureRecognizer.h</a><br>属性列表</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="built_in">NS_OPTIONS</span>(<span class="built_in">NSUInteger</span>, <span class="built_in">UISwipeGestureRecognizerDirection</span>) &#123;</span><br><span class="line">    <span class="built_in">UISwipeGestureRecognizerDirectionRight</span> = <span class="number">1</span> &lt;&lt; <span class="number">0</span>, <span class="comment">// 往右边轻扫</span></span><br><span class="line">    <span class="built_in">UISwipeGestureRecognizerDirectionLeft</span>  = <span class="number">1</span> &lt;&lt; <span class="number">1</span>, <span class="comment">// 往左边轻扫</span></span><br><span class="line">    <span class="built_in">UISwipeGestureRecognizerDirectionUp</span>    = <span class="number">1</span> &lt;&lt; <span class="number">2</span>, <span class="comment">// 往上边轻扫</span></span><br><span class="line">    <span class="built_in">UISwipeGestureRecognizerDirectionDown</span>  = <span class="number">1</span> &lt;&lt; <span class="number">3</span>  <span class="comment">// 往下边轻扫</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>) <span class="built_in">NSUInteger</span> numberOfTouchesRequired; </span><br><span class="line"><span class="comment">// 设置轻扫手指的个数,默认是1个</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>) <span class="built_in">UISwipeGestureRecognizerDirection</span> direction; </span><br><span class="line"><span class="comment">// 设置轻扫的方向</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="UILongPressGestureRecognizer-长按"><a href="#UILongPressGestureRecognizer-长按" class="headerlink" title="UILongPressGestureRecognizer 长按"></a><span id="UILongPressGestureRecognizer.h">UILongPressGestureRecognizer 长按</span></h2><p>父类 : <a href="#UIGestureRecognizer.h">UIGestureRecognizer.h</a></p>
+<p>属性列表</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>) <span class="built_in">NSUInteger</span> numberOfTapsRequired;      </span><br><span class="line"><span class="comment">// 轻拍的次数,默认是0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>) <span class="built_in">NSUInteger</span> numberOfTouchesRequired;   </span><br><span class="line"><span class="comment">// 设置轻拍时手指的个数,默认是1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>) <span class="built_in">CFTimeInterval</span> minimumPressDuration; </span><br><span class="line"><span class="comment">// 设置最小长按时间,默认是0.5.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>) <span class="built_in">CGFloat</span> allowableMovement; </span><br><span class="line"><span class="comment">// 暂时不知道有什么用</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="UIPinchGestureRecognizer-捏合"><a href="#UIPinchGestureRecognizer-捏合" class="headerlink" title="UIPinchGestureRecognizer 捏合"></a><span id="UIPinchGestureRecognizer.h">UIPinchGestureRecognizer 捏合</span></h2><p>父类 : <a href="#UIGestureRecognizer.h">UIGestureRecognizer.h</a></p>
+<p>捏合手势,使用场景:查看相册里的图片的时候,我们可以两指捏合进行放大或者缩小的操作</p>
+<p>属性列表</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>) <span class="built_in">CGFloat</span> scale;</span><br><span class="line"><span class="comment">// 置缩放比例(1是正常缩放, &lt;1 是缩小, &gt;1是放大 )</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>,<span class="keyword">readonly</span>) <span class="built_in">CGFloat</span> velocity;</span><br><span class="line"><span class="comment">// 速度</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="UIRotationGestureRecognizer-旋转"><a href="#UIRotationGestureRecognizer-旋转" class="headerlink" title="UIRotationGestureRecognizer 旋转"></a><span id="UIRotationGestureRecognizer.h">UIRotationGestureRecognizer 旋转</span></h2><p>父类 : <a href="#UIGestureRecognizer.h">UIGestureRecognizer.h</a></p>
+<p>属性列表</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>) <span class="built_in">CGFloat</span> rotation;            <span class="comment">// rotation in radians</span></span><br><span class="line"><span class="comment">// 旋转大小</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>,<span class="keyword">readonly</span>) <span class="built_in">CGFloat</span> velocity; </span><br><span class="line"><span class="comment">// 速度</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="UIGestureRecognizer-Delegate"><a href="#UIGestureRecognizer-Delegate" class="headerlink" title="UIGestureRecognizer Delegate"></a><span id="UIGestureRecognizer Delegate">UIGestureRecognizer Delegate</span></h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">BOOL</span>)gestureRecognizer:(<span class="built_in">UIGestureRecognizer</span> *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(<span class="built_in">UIGestureRecognizer</span> *)otherGestureRecognizer;</span><br><span class="line"><span class="comment">// 返回YES,同时支持多个手势</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/API/" rel="tag">#API</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/04/03/网络编程学习/" rel="prev" title="网络编程学习">
+                网络编程学习 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="SunnyLinSD" />
+          <p class="site-author-name" itemprop="name">SunnyLinSD</p>
+          <p class="site-description motion-element" itemprop="description">一件事明明可以做到极致,为什么要止步于过得去呢?</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#在iOS中-苹果给我们提供了很多相当丰富的手势操作-而我们也只需要进行简单的调用-就可以直接使用-并且还可以监控手势状态"><span class="nav-number">1.</span> <span class="nav-text">在iOS中,苹果给我们提供了很多相当丰富的手势操作,而我们也只需要进行简单的调用,就可以直接使用.并且还可以监控手势状态</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UIGestureRecognizer-手势识别器"><span class="nav-number"></span> <span class="nav-text">UIGestureRecognizer 手势识别器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UIPanGestureRecognizer-拖动"><span class="nav-number"></span> <span class="nav-text">UIPanGestureRecognizer 拖动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UIScreenEdgePanGestureRecognizer-屏幕边缘平移"><span class="nav-number"></span> <span class="nav-text">UIScreenEdgePanGestureRecognizer 屏幕边缘平移</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UITapGestureRecognizer-轻拍"><span class="nav-number"></span> <span class="nav-text">UITapGestureRecognizer 轻拍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UISwipeGestureRecognizer-轻扫"><span class="nav-number"></span> <span class="nav-text">UISwipeGestureRecognizer 轻扫</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UILongPressGestureRecognizer-长按"><span class="nav-number"></span> <span class="nav-text">UILongPressGestureRecognizer 长按</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UIPinchGestureRecognizer-捏合"><span class="nav-number"></span> <span class="nav-text">UIPinchGestureRecognizer 捏合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UIRotationGestureRecognizer-旋转"><span class="nav-number"></span> <span class="nav-text">UIRotationGestureRecognizer 旋转</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UIGestureRecognizer-Delegate"><span class="nav-number"></span> <span class="nav-text">UIGestureRecognizer Delegate</span></a></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">SunnyLinSD</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -64,7 +64,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Swift," />
 
 
 
@@ -80,15 +80,19 @@
 
 
 
-<meta name="description" content="一件事明明可以做到极致,为什么要止步于过得去呢?">
-<meta property="og:type" content="website">
-<meta property="og:title" content="SunnyLinSD Blog">
-<meta property="og:url" content="http://sunnylinsd.github.io/page/2/index.html">
+<meta name="description" content="控制流
+使用 if 和 switch 来进行条件操作，使用 for-in 、 for 、 while 和 repeat-while 来进行循环。包裹条件和循环变量括号可以省略，但是语句体的大括号是必须的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swift基础语法之控制流和闭包">
+<meta property="og:url" content="http://sunnylinsd.github.io/2016/04/18/Swift基础语法之控制流和闭包/index.html">
 <meta property="og:site_name" content="SunnyLinSD Blog">
-<meta property="og:description" content="一件事明明可以做到极致,为什么要止步于过得去呢?">
+<meta property="og:description" content="控制流
+使用 if 和 switch 来进行条件操作，使用 for-in 、 for 、 while 和 repeat-while 来进行循环。包裹条件和循环变量括号可以省略，但是语句体的大括号是必须的">
+<meta property="og:updated_time" content="2016-04-18T01:46:31.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SunnyLinSD Blog">
-<meta name="twitter:description" content="一件事明明可以做到极致,为什么要止步于过得去呢?">
+<meta name="twitter:title" content="Swift基础语法之控制流和闭包">
+<meta name="twitter:description" content="控制流
+使用 if 和 switch 来进行条件操作，使用 for-in 、 for 、 while 和 repeat-while 来进行循环。包裹条件和循环变量括号可以省略，但是语句体的大括号是必须的">
 
 
 
@@ -106,7 +110,7 @@
   };
 </script>
 
-  <title> SunnyLinSD Blog </title>
+  <title> Swift基础语法之控制流和闭包 | SunnyLinSD Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -127,9 +131,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-right 
-   page-home 
- ">
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -216,9 +218,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
   
@@ -238,10 +240,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/2016/04/03/网络编程学习/" itemprop="url">
-                  网络编程学习
-                </a>
+                Swift基础语法之控制流和闭包
               
             
           </h1>
@@ -253,8 +252,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-03T15:37:29+08:00" content="2016-04-03 15:37:29">
-              2016-04-03 15:37:29
+            <time itemprop="dateCreated" datetime="2016-04-18T09:43:33+08:00" content="2016-04-18 09:43:33">
+              2016-04-18 09:43:33
             </time>
           </span>
 
@@ -267,8 +266,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/网络相关/" itemprop="url" rel="index">
-                    <span itemprop="name">网络相关</span>
+                  <a href="/categories/Swift语法/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift语法</span>
                   </a>
                 </span>
 
@@ -300,163 +299,64 @@
       
 
       
-        
-          <hr>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在开发中,网络与我们的程序总是息息相关的,网络编程是每个程序员都必须掌握的一门技能</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/04/03/网络编程学习/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
+        <h2 id="控制流"><a href="#控制流" class="headerlink" title="控制流"></a>控制流</h2><hr>
+<p>使用 <code>if</code> 和 <code>switch</code> 来进行条件操作，使用 <code>for-in</code> 、 <code>for</code> 、 <code>while</code> 和 <code>repeat-while</code> 来进行循环。包裹条件和循环变量括号可以省略，但是语句体的大括号是必须的</p>
+<a id="more"></a>
+<h2 id="if-和-for-in-语句"><a href="#if-和-for-in-语句" class="headerlink" title="if 和 for-in 语句"></a>if 和 for-in 语句</h2><hr>
+<p>遍历一个数组中的所有数字,大于50自增3,否则自增1<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> nums = [<span class="number">92</span>,<span class="number">22</span>,<span class="number">23</span>,<span class="number">12</span>,<span class="number">43</span>,<span class="number">89</span>,<span class="number">182</span>,<span class="number">76</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">2</span>]</span><br><span class="line"><span class="keyword">var</span> <span class="built_in">count</span>:(<span class="type">Int</span>) = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> num <span class="keyword">in</span> nums &#123;</span><br><span class="line">    <span class="keyword">if</span> num &gt; <span class="number">50</span> &#123;</span><br><span class="line">        <span class="built_in">count</span>+=<span class="number">3</span></span><br><span class="line">    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">count</span>+=<span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Swift和OC在条件语句上的判断有些区别,OC中允许使用某个变量放到条件语句的判断式中进行判断,系统会自动判断是否为 <code>nil</code>(0) 或 <code>有值</code>.但是Swift中if语句的条件判断式必须是一个表达式,而不会隐形的和nil或0去做判断</p>
+
       
     </div>
     
     <div>
       
+        
+      
     </div>
 
     <div>
+      
+        
       
     </div>
 
     <footer class="post-footer">
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/03/22/iOS手势识别API学习/" itemprop="url">
-                  iOS手势识别API学习
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-22T06:32:15+08:00" content="2016-03-22 06:32:15">
-              2016-03-22 06:32:15
-            </time>
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/API-学习/" itemprop="url" rel="index">
-                    <span itemprop="name">API 学习</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
+            <a href="/tags/Swift/" rel="tag">#Swift</a>
           
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          <hr>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在iOS中,苹果给我们提供了很多相当丰富的手势操作,而我们也只需要进行简单的调用,就可以直接使用.并且还可以监控手势状态</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/03/22/iOS手势识别API学习/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/18/Swift基础语法/" rel="next" title="Swift基础语法">
+                <i class="fa fa-chevron-left"></i> Swift基础语法
+              </a>
+            
           </div>
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
 
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
       
 
       
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
-  </section>
 
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
-  </nav>
-
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -464,6 +364,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -483,8 +387,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/avatar.png"
@@ -534,6 +447,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#控制流"><span class="nav-number">1.</span> <span class="nav-text">控制流</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#if-和-for-in-语句"><span class="nav-number">2.</span> <span class="nav-text">if 和 for-in 语句</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -630,6 +554,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 

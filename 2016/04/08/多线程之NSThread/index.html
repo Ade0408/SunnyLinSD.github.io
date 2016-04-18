@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next pisces use-motion">
+<html class="theme-next mist use-motion">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -80,23 +80,23 @@
 
 
 
-<meta name="description" content="iOS中的多线程技术主要有NSThread, GCD和NSOperation。他们的封装层次依次递增，其中 NSThread 封装性最差，最偏向于底层，主要基于thread使用.一个 NSThread 对象就等于一条线程">
+<meta name="description" content="前言iOS中的多线程技术主要有NSThread, GCD和NSOperation。他们的封装层次依次递增，其中 NSThread 封装性最差，最偏向于底层，主要基于thread使用.一个 NSThread 对象就等于一条线程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="多线程之NSThread">
-<meta property="og:url" content="http://yoursite.com/2016/04/08/多线程之NSThread/index.html">
+<meta property="og:url" content="http://sunnylinsd.github.io/2016/04/08/多线程之NSThread/index.html">
 <meta property="og:site_name" content="SunnyLinSD Blog">
-<meta property="og:description" content="iOS中的多线程技术主要有NSThread, GCD和NSOperation。他们的封装层次依次递增，其中 NSThread 封装性最差，最偏向于底层，主要基于thread使用.一个 NSThread 对象就等于一条线程">
-<meta property="og:updated_time" content="2016-04-17T07:51:49.000Z">
+<meta property="og:description" content="前言iOS中的多线程技术主要有NSThread, GCD和NSOperation。他们的封装层次依次递增，其中 NSThread 封装性最差，最偏向于底层，主要基于thread使用.一个 NSThread 对象就等于一条线程">
+<meta property="og:updated_time" content="2016-04-18T00:51:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="多线程之NSThread">
-<meta name="twitter:description" content="iOS中的多线程技术主要有NSThread, GCD和NSOperation。他们的封装层次依次递增，其中 NSThread 封装性最差，最偏向于底层，主要基于thread使用.一个 NSThread 对象就等于一条线程">
+<meta name="twitter:description" content="前言iOS中的多线程技术主要有NSThread, GCD和NSOperation。他们的封装层次依次递增，其中 NSThread 封装性最差，最偏向于底层，主要基于thread使用.一个 NSThread 对象就等于一条线程">
 
 
 
 <script type="text/javascript" id="hexo.configuration">
   var NexT = window.NexT || {};
   var CONFIG = {
-    scheme: 'Pisces',
+    scheme: 'Mist',
     sidebar: {"position":"left","display":"always"},
     fancybox: true,
     motion: true,
@@ -297,8 +297,8 @@
 
       
         <hr>
-<h4 id="iOS中的多线程技术主要有NSThread-GCD和NSOperation。他们的封装层次依次递增，其中-NSThread-封装性最差，最偏向于底层，主要基于thread使用-一个-NSThread-对象就等于一条线程"><a href="#iOS中的多线程技术主要有NSThread-GCD和NSOperation。他们的封装层次依次递增，其中-NSThread-封装性最差，最偏向于底层，主要基于thread使用-一个-NSThread-对象就等于一条线程" class="headerlink" title="iOS中的多线程技术主要有NSThread, GCD和NSOperation。他们的封装层次依次递增，其中 NSThread 封装性最差，最偏向于底层，主要基于thread使用.一个 NSThread 对象就等于一条线程"></a>iOS中的多线程技术主要有NSThread, GCD和NSOperation。他们的封装层次依次递增，其中 <code>NSThread</code> 封装性最差，最偏向于底层，<code>主要基于thread使用</code>.一个 <code>NSThread</code> 对象就等于一条线程</h4><hr>
-<a id="more"></a>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>iOS中的多线程技术主要有NSThread, GCD和NSOperation。他们的封装层次依次递增，其中 <code>NSThread</code> 封装性最差，最偏向于底层，<code>主要基于thread使用</code>.一个 <code>NSThread</code> 对象就等于一条线程<br><a id="more"></a></p>
+<hr>
 <h2 id="NSThread-创建"><a href="#NSThread-创建" class="headerlink" title="NSThread 创建"></a><span id="NSThread 创建">NSThread 创建</span></h2><p>线程创建, 对于NSThread来说，每一个对象就代表着一个线程，NSThread提供了2种创建线程的方法,detach方法直接创建并启动一个线程去Selector，由于没有返回值，如果需要获取新创建的Thread，需要在执行的Selector中调用 <code>-[NSThread currentThread]</code> 获取</p>
   <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="keyword">void</span>)detachNewThreadSelector:(SEL)selector toTarget:(<span class="keyword">id</span>)target withObject:(nullable <span class="keyword">id</span>)argument;</span><br></pre></td></tr></table></figure>
 <p>init方法初始化线程并返回，线程的入口函数由Selector传入。线程创建出来之后需要手动调用-start方法启动</p>
@@ -456,7 +456,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-count">11</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -464,7 +464,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -502,7 +502,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#iOS中的多线程技术主要有NSThread-GCD和NSOperation。他们的封装层次依次递增，其中-NSThread-封装性最差，最偏向于底层，主要基于thread使用-一个-NSThread-对象就等于一条线程"><span class="nav-number">1.</span> <span class="nav-text">iOS中的多线程技术主要有NSThread, GCD和NSOperation。他们的封装层次依次递增，其中 NSThread 封装性最差，最偏向于底层，主要基于thread使用.一个 NSThread 对象就等于一条线程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NSThread-创建"><span class="nav-number"></span> <span class="nav-text">NSThread 创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NSThread-操作"><span class="nav-number"></span> <span class="nav-text">NSThread 操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程通讯"><span class="nav-number"></span> <span class="nav-text">线程通讯</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程优先级"><span class="nav-number"></span> <span class="nav-text">线程优先级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主线程和当前线程"><span class="nav-number"></span> <span class="nav-text">主线程和当前线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程通知"><span class="nav-number"></span> <span class="nav-text">线程通知</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NSThread-创建"><span class="nav-number">2.</span> <span class="nav-text">NSThread 创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NSThread-操作"><span class="nav-number">3.</span> <span class="nav-text">NSThread 操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程通讯"><span class="nav-number">4.</span> <span class="nav-text">线程通讯</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程优先级"><span class="nav-number">5.</span> <span class="nav-text">线程优先级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主线程和当前线程"><span class="nav-number">6.</span> <span class="nav-text">主线程和当前线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程通知"><span class="nav-number">7.</span> <span class="nav-text">线程通知</span></a></li></ol></div>
             
           </div>
         </section>
@@ -535,7 +535,7 @@
 <div class="theme-info">
   主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Pisces
+    NexT.Mist
   </a>
 </div>
 
@@ -600,13 +600,6 @@
 
   
   
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
-
-
 
   
   <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>

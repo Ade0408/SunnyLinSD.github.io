@@ -64,7 +64,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="框架," />
+  <meta name="keywords" content="图片," />
 
 
 
@@ -80,18 +80,28 @@
 
 
 
-<meta name="description" content="前言SDTab Control 是我最近在写一个项目时的突发奇想.它可以实现两行代码实现选项卡功能,选项卡的功能现在在项目中越来越常见,每次遇到时,都得自己写一百来行代码实现,确实麻烦,所以我就自己封装了一个,目前功能简单,就只是简单的实现日常功能的使用,后续有时间会慢慢完善">
+<meta name="description" content="前言
+在iOS中,我们有三种方式可以从设备上的照片上写入图片还有获取图片 : 
+
+写入图片 : 
+12341. 通过这个函数将图片写入到照片中UIKIT_EXTERN void UIImageWriteToSavedPhotosAlbum(UIImage *image, __nullable id completionTarget, __nullable SEL completionSelecto">
 <meta property="og:type" content="article">
-<meta property="og:title" content="自定义选项卡之SDTabControl">
-<meta property="og:url" content="http://sunnylinsd.github.io/2016/04/11/自定义选项卡之SDTabControl/index.html">
+<meta property="og:title" content="iOS中图片的获取与保存">
+<meta property="og:url" content="http://sunnylinsd.github.io/2016/04/19/iOS中图片的获取与保存/index.html">
 <meta property="og:site_name" content="SunnyLinSD Blog">
-<meta property="og:description" content="前言SDTab Control 是我最近在写一个项目时的突发奇想.它可以实现两行代码实现选项卡功能,选项卡的功能现在在项目中越来越常见,每次遇到时,都得自己写一百来行代码实现,确实麻烦,所以我就自己封装了一个,目前功能简单,就只是简单的实现日常功能的使用,后续有时间会慢慢完善">
-<meta property="og:image" content="http://7xrw7r.com1.z0.glb.clouddn.com/SDTabControl.gif">
-<meta property="og:updated_time" content="2016-04-18T00:51:55.000Z">
+<meta property="og:description" content="前言
+在iOS中,我们有三种方式可以从设备上的照片上写入图片还有获取图片 : 
+
+写入图片 : 
+12341. 通过这个函数将图片写入到照片中UIKIT_EXTERN void UIImageWriteToSavedPhotosAlbum(UIImage *image, __nullable id completionTarget, __nullable SEL completionSelecto">
+<meta property="og:updated_time" content="2016-04-19T14:40:55.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="自定义选项卡之SDTabControl">
-<meta name="twitter:description" content="前言SDTab Control 是我最近在写一个项目时的突发奇想.它可以实现两行代码实现选项卡功能,选项卡的功能现在在项目中越来越常见,每次遇到时,都得自己写一百来行代码实现,确实麻烦,所以我就自己封装了一个,目前功能简单,就只是简单的实现日常功能的使用,后续有时间会慢慢完善">
-<meta name="twitter:image" content="http://7xrw7r.com1.z0.glb.clouddn.com/SDTabControl.gif">
+<meta name="twitter:title" content="iOS中图片的获取与保存">
+<meta name="twitter:description" content="前言
+在iOS中,我们有三种方式可以从设备上的照片上写入图片还有获取图片 : 
+
+写入图片 : 
+12341. 通过这个函数将图片写入到照片中UIKIT_EXTERN void UIImageWriteToSavedPhotosAlbum(UIImage *image, __nullable id completionTarget, __nullable SEL completionSelecto">
 
 
 
@@ -109,7 +119,7 @@
   };
 </script>
 
-  <title> 自定义选项卡之SDTabControl | SunnyLinSD Blog </title>
+  <title> iOS中图片的获取与保存 | SunnyLinSD Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -269,7 +279,7 @@
             
             
               
-                自定义选项卡之SDTabControl
+                iOS中图片的获取与保存
               
             
           </h1>
@@ -281,8 +291,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-11T21:28:20+08:00" content="2016-04-11 21:28">
-              2016-04-11 21:28
+            <time itemprop="dateCreated" datetime="2016-04-19T19:41:25+08:00" content="2016-04-19 19:41">
+              2016-04-19 19:41
             </time>
           </span>
 
@@ -295,8 +305,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/自定义框架/" itemprop="url" rel="index">
-                    <span itemprop="name">自定义框架</span>
+                  <a href="/categories/iOS探究/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS探究</span>
                   </a>
                 </span>
 
@@ -311,8 +321,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/04/11/自定义选项卡之SDTabControl/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/11/自定义选项卡之SDTabControl/" itemprop="commentsCount"></span>
+                <a href="/2016/04/19/iOS中图片的获取与保存/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/19/iOS中图片的获取与保存/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -335,21 +345,37 @@
       
 
       
-        <hr>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>SDTab Control 是我最近在写一个项目时的突发奇想.它可以实现两行代码实现选项卡功能,选项卡的功能现在在项目中越来越常见,每次遇到时,都得自己写一百来行代码实现,确实麻烦,所以我就自己封装了一个,目前功能简单,就只是简单的实现日常功能的使用,后续有时间会慢慢完善</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><hr>
+<p>在iOS中,我们有三种方式可以从设备上的照片上写入图片还有获取图片 : </p>
+<ul>
+<li><p>写入图片 : </p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> 通过这个函数将图片写入到照片中</span><br><span class="line"><span class="built_in">UIKIT_EXTERN</span> <span class="keyword">void</span> <span class="built_in">UIImageWriteToSavedPhotosAlbum</span>(<span class="built_in">UIImage</span> *image, __nullable <span class="keyword">id</span> completionTarget, __nullable SEL completionSelector, <span class="keyword">void</span> * __nullable contextInfo) __TVOS_PROHIBITED;</span><br><span class="line"><span class="number">2.</span> 通过AssetsLibrary框架,但是该框架已经在iOS9是淘汰了(被设置为过期)</span><br><span class="line"><span class="number">3.</span> 通过Photos框架(iOS8发布,iOS9之后苹果大力推荐使用的一个框架)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取图片 </p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> 通过<span class="built_in">UIImagePickerController</span>,但是一次只能获取一张</span><br><span class="line"><span class="number">2.</span> 通过AssetsLibrary框架,能获取多张,但是该框架已经被淘汰</span><br><span class="line"><span class="number">3.</span> 通过Photos框架,能获取多张</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
 <a id="more"></a>
-<hr>
-<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>创建一个SDTab Control</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">SDTabControl *tabControl = [[SDTabControl alloc] initWithFrame:<span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">64</span>, [<span class="built_in">UIScreen</span> mainScreen].bounds.size.width, <span class="number">35</span>) WithTitlesName:@[<span class="string">@"One"</span>,<span class="string">@"Two"</span>,<span class="string">@"Three"</span>,<span class="string">@"Four"</span>,<span class="string">@"Five"</span>] clickButtonHandle:^(<span class="built_in">NSInteger</span> index) &#123;        </span><br><span class="line">   <span class="built_in">NSLog</span>(<span class="string">@"%zd"</span>,index);</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
-<p>添加到控制器View上</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="keyword">self</span>.view addSubview:tabControl];</span><br></pre></td></tr></table></figure>
-<p>效果图</p>
-<p><img src="http://7xrw7r.com1.z0.glb.clouddn.com/SDTabControl.gif" alt=""></p>
-<p>下载地址 :</p>
-<p><a href="https://github.com/SunnyLinSD/SDTabControl" target="_blank" rel="external">https://github.com/SunnyLinSD/SDTabControl</a></p>
+<h2 id="Photo-Kit"><a href="#Photo-Kit" class="headerlink" title="Photo Kit"></a>Photo Kit</h2><hr>
+<p>本文主要讲解如何使用<code>Photo Kit</code>来保存和获取,图片,所以现在我们先来了解一下<code>Photo Kit</code>中几个比较主要的对象 : </p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** 查询类 */</span></span><br><span class="line">PHAsset : 一个PHAsset对象代表一张图片或者一个视频文件 , 负责查询一堆的PHAsset对象</span><br><span class="line">PHAssetCollection : 一个PHAssetCollection对象代表一个相册 , 负责查询一堆的PHAssetCollection对象</span><br><span class="line"></span><br><span class="line"><span class="comment">/** 操作类 */</span></span><br><span class="line">PHAssetChangeRequest : 负责执行对PHAsset的【增删改】操作,这个类只能放在 -[PHPhotoLibrary performChanges:completionHandler:] 或者 -[PHPhotoLibrary performChangesAndWait:error:] 方法的block中使用</span><br><span class="line">PHAssetCollectionChangeRequest : 负责执行对PHAssetCollection的【增删改】操作,这个类只能放在 -[PHPhotoLibrary performChanges:completionHandler:]` 或者 `-[PHPhotoLibrary performChangesAndWait:error:] 方法的block中使用</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** 请求图片 */</span></span><br><span class="line">- (PHImageRequestID)requestImageForAsset:(PHAsset *)asset targetSize:(<span class="built_in">CGSize</span>)targetSize contentMode:(PHImageContentMode)contentMode options:(nullable PHImageRequestOptions *)options resultHandler:(<span class="keyword">void</span> (^)(<span class="built_in">UIImage</span> *__nullable result, <span class="built_in">NSDictionary</span> *__nullable info))resultHandler; </span><br><span class="line">PHImageManager : 请求图片 , 使用该类时不应该生成该类的实例，而应该使用该类的提供的单例对象 ,该方法提供指定的尺寸的图像，与ALAssetsLibrary库相比，没有了方便的缩略图提供。不过要吐槽的是，ALAssetsLibrary库提供的缩略图往往尺寸太小并且质量很低，用在 TableView 上还可以.需要注意的是，该方法在默认情况下是异步执行的，而且 Photos 库可能会多次执行 resultHandler 块，因为对于指定的尺寸，Photos 可能会先提供低质量的图像以供临时显示，随后会将指定尺寸的图像返回。如果指定尺寸的高质量的图像有缓存，那么直接提供高质量的图像。而这些行为，可以通过 options 参数来定制。</span><br></pre></td></tr></table></figure>
+<p>PHImageRequestOptions : 用于定制请求。上面的方法返回指定尺寸的图像，如果你仅仅指定必要的参数而没有对 options 进行配置的话，返回的图像尺寸将会是原始图像的尺寸。或者，你指定的尺寸很小，这时候会按照你的要求来返回接近该尺寸的图像。PHImageRequestOptions有以下几个重要的属性：</p>
+<ul>
+<li>synchronous ：指定请求是否同步执行。</li>
+<li>resizeMode ：对请求的图像怎样缩放。有三种选择：None，不缩放；Fast，尽快地提供接近或稍微大于要求的尺寸；Exact，精准提供要求的尺寸。</li>
+<li>deliveryMode ：图像质量。有三种值：Opportunistic，在速度与质量中均衡；HighQualityFormat，不管花费多长时间，提供高质量图像；FastFormat，以最快速度提供好的质量。这个属性只有在 synchronous 为 true 时有效。</li>
+<li>normalizedCropRect ：用于对原始尺寸的图像进行裁剪，基于比例坐标。只在 resizeMode 为 Exact 时有效。</li>
+</ul>
 <blockquote>
-<p>欢迎各位在使用后,跟我反馈这个小控件的问题,因为从写到上传前后我并没有花太多的时间,所以也许很多场景的实现我没有完全考虑到,若你在使用中有任何问题,随时欢迎跟我吐槽!!!</p>
+<p>resizeMode 默认是 None，这也造成了返回图像尺寸与要求尺寸不符。这点需要注意。要返回一个指定尺寸的图像需要避免两层陷阱：一定要指定 options 参数，resizeMode 不能为 None。</p>
 </blockquote>
+<p>除了必有的请求图像或是视频的功能外，PHImageManager添加了两大功能： </p>
+<ul>
+<li>缓存图像 : 由其子类PHCachingImageManager实现，缓存效率和空间管理能满足大部分场景的需求； </li>
+<li>裁剪图像 : 这个功能很久以前就有强烈的需求</li>
+</ul>
+<p>未完待续…</p>
 
       
     </div>
@@ -370,7 +396,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/框架/" rel="tag">#框架</a>
+            <a href="/tags/图片/" rel="tag">#图片</a>
           
         </div>
       
@@ -379,17 +405,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/04/09/Runloop学习/" rel="next" title="Runloop 学习">
-                <i class="fa fa-chevron-left"></i> Runloop 学习
+              <a href="/2016/04/18/Swift基础语法之控制流/" rel="next" title="Swift基础语法之控制流">
+                <i class="fa fa-chevron-left"></i> Swift基础语法之控制流
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/04/11/OC中属性修饰符详解/" rel="prev" title="OC中属性修饰符详解">
-                OC中属性修饰符详解 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -404,10 +426,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/04/11/自定义选项卡之SDTabControl/"
-     data-title="自定义选项卡之SDTabControl"
+        <div class="ds-share flat" data-thread-key="2016/04/19/iOS中图片的获取与保存/"
+     data-title="iOS中图片的获取与保存"
      data-content=""
-     data-url="http://sunnylinsd.github.io/2016/04/11/自定义选项卡之SDTabControl/">
+     data-url="http://sunnylinsd.github.io/2016/04/19/iOS中图片的获取与保存/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -434,8 +456,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/04/11/自定义选项卡之SDTabControl/"
-           data-title="自定义选项卡之SDTabControl" data-url="http://sunnylinsd.github.io/2016/04/11/自定义选项卡之SDTabControl/">
+      <div class="ds-thread" data-thread-key="2016/04/19/iOS中图片的获取与保存/"
+           data-title="iOS中图片的获取与保存" data-url="http://sunnylinsd.github.io/2016/04/19/iOS中图片的获取与保存/">
       </div>
     
   </div>
@@ -546,7 +568,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现"><span class="nav-number">2.</span> <span class="nav-text">实现</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Photo-Kit"><span class="nav-number">2.</span> <span class="nav-text">Photo Kit</span></a></li></ol></div>
             
           </div>
         </section>

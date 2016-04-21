@@ -1,0 +1,741 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Swift," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="函数
+函数是用来完成特定任务的独立的代码块。你给一个函数起一个合适的名字，用来标识函数做什么，并且当函数需要执行的时候，这个名字会被用于“调用”函数,使用func来声明一个函数，使用名字和参数来调用函数。使用-&amp;gt;来指定函数返回值的类型
+
+func 函数名称(参数名:参数类型, 参数名:参数类型…) -&amp;gt; 函数返回值 {函数实现部分}
+1234func showString (name:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swift基本语法函数和闭包">
+<meta property="og:url" content="http://sunnylinsd.github.io/2016/04/21/Swift基本语法函数和闭包/index.html">
+<meta property="og:site_name" content="SunnyLinSD Blog">
+<meta property="og:description" content="函数
+函数是用来完成特定任务的独立的代码块。你给一个函数起一个合适的名字，用来标识函数做什么，并且当函数需要执行的时候，这个名字会被用于“调用”函数,使用func来声明一个函数，使用名字和参数来调用函数。使用-&amp;gt;来指定函数返回值的类型
+
+func 函数名称(参数名:参数类型, 参数名:参数类型…) -&amp;gt; 函数返回值 {函数实现部分}
+1234func showString (name:">
+<meta property="og:updated_time" content="2016-04-21T02:28:06.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Swift基本语法函数和闭包">
+<meta name="twitter:description" content="函数
+函数是用来完成特定任务的独立的代码块。你给一个函数起一个合适的名字，用来标识函数做什么，并且当函数需要执行的时候，这个名字会被用于“调用”函数,使用func来声明一个函数，使用名字和参数来调用函数。使用-&amp;gt;来指定函数返回值的类型
+
+func 函数名称(参数名:参数类型, 参数名:参数类型…) -&amp;gt; 函数返回值 {函数实现部分}
+1234func showString (name:">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6274792686226507000,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> Swift基本语法函数和闭包 | SunnyLinSD Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?934f6f2816d9b2a541aa84b1e0d58b0a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">SunnyLinSD Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-talk">
+          <a href="/talk" rel="section">
+            
+              <i class="menu-item-icon fa fa-meh-o fa-fw"></i> <br />
+            
+            说说
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Swift基本语法函数和闭包
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-21T10:25:31+08:00" content="2016-04-21 10:25">
+              2016-04-21 10:25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Swift基础语法/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift基础语法</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/21/Swift基本语法函数和闭包/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/21/Swift基本语法函数和闭包/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><hr>
+<p>函数是用来完成特定任务的独立的代码块。你给一个函数起一个合适的名字，用来标识函数做什么，并且当函数需要执行的时候，这个名字会被用于“调用”函数,使用func来声明一个函数，使用名字和参数来调用函数。使用-&gt;来指定函数返回值的类型</p>
+<ul>
+<li><p>func 函数名称(参数名:参数类型, 参数名:参数类型…) -&gt; 函数返回值 {函数实现部分}</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">showString</span> <span class="params">(name:String,day:String)</span></span> -&gt;<span class="type">String</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"Hello ,\(name).Toay is \(day)"</span></span><br><span class="line">&#125;</span><br><span class="line">showString(<span class="string">"Sunny"</span>, day: <span class="string">"web"</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<a id="more"></a>
+<p>在Swift中,没有参数没有返回值的函数,可以写成这样 :<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** say()括号中什么都不写,代表无参数, -&gt;Void代表无返回值*/</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">say</span><span class="params">()</span></span> -&gt; <span class="type">Void</span> &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"hello"</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/** 调用函数 */</span></span><br><span class="line">say()</span><br><span class="line"></span><br><span class="line"><span class="comment">/** 无返回值的另一种写法,其实Void就是一个空元组,所以可以写成 () */</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">say1</span><span class="params">()</span></span> -&gt; () &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"hello"</span>)</span><br><span class="line">&#125;</span><br><span class="line">say1()</span><br><span class="line"></span><br><span class="line"><span class="comment">/** 当无返回值时,你甚至可以直接省略不写 */</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">say2</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"hello"</span>)</span><br><span class="line">&#125;</span><br><span class="line">say2()</span><br></pre></td></tr></table></figure></p>
+<p>在Swift中,有参数没有返回值的函数,就有多种写法了 : </p>
+<ul>
+<li><p>内部/外部参数 : Swift2.0以前, 默认情况下的参数都是内部参数,Swift2.0开始, 默认将第二个参数名称作为外部参数 . 如果没有明确地指定外部参数, 那么系统默认会从第二个参数开始, 将参数的名称作为外部参数 . 外部参数只能外部用, 函数内部不能使用, 函数内部只能使用内部参数 . 忽略外部参数: 在内部参数前加 <code>_</code> :</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  <span class="comment">/** Swift2.0之前, 默认是不会将第二个参数开始的参数名称作为外部参数的, 必须自己手动指定 */</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">sum1</span><span class="params">(first i: Int, second j: Int)</span></span> &#123;</span><br><span class="line">    <span class="built_in">print</span>(i + j)</span><br><span class="line">&#125;</span><br><span class="line">sum1(first: <span class="number">10</span>, second: <span class="number">20</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>默认参数 : 当默认值被定义后，调用这个函数时可以忽略这个参数,其它语言的默认参数必须写在最后面, Swift可以写在任意位置(将带有默认值的参数放在函数参数列表的最后。这样可以保证在函数调用时，非默认参数的顺序是一致的，同时使得相同的函数在不同情况下调用时显得更为清晰)  :</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  <span class="function"><span class="keyword">func</span> <span class="title">sum2</span><span class="params">(i: Int, j: Int = <span class="number">10</span>)</span></span> &#123;</span><br><span class="line">    <span class="built_in">print</span>(i + j)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/** 只给i赋值,j采用默认值 */</span></span><br><span class="line">sum2(<span class="number">10</span>)  <span class="comment">// 打印结果是20</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>常量参数和变量参数 : 函数参数默认是常量, 在函数内部不能修改,如果想在函数中修改参数, 必须在参数前加上var : </p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num1 = <span class="number">10</span></span><br><span class="line"><span class="keyword">var</span> num2 = <span class="number">20</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 注意: 操作的是局部变量, 对实参没有影响 */</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">swap1</span><span class="params">(<span class="keyword">var</span> value1: Int, <span class="keyword">var</span> value2: Int)</span></span>&#123;</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">"交互前: value1 = \(value1), value2 = \(value2)"</span>)</span><br><span class="line">  <span class="keyword">let</span> temp = value1</span><br><span class="line">  value1 = value2</span><br><span class="line">  value2 = temp</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">"交互后: value1 = \(value1), value2 = \(value2)"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">swap1(num1, value2: num2)</span><br><span class="line"><span class="built_in">print</span>(num1)</span><br><span class="line"><span class="built_in">print</span>(num2)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>输入输出参数 : 变量参数，正如上面所述，仅仅能在函数体内被更改。如果你想要一个函数可以修改参数的值，并且想要在这些修改在函数调用结束后仍然存在，那么就应该把这个参数定义为输入输出参数（In-Out Parameters）,定义一个输入输出参数时，在参数定义前加 <code>inout</code> 关键字 : </p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">  <span class="function"><span class="keyword">func</span> <span class="title">swap2</span><span class="params">(<span class="keyword">inout</span> value1: Int, <span class="keyword">inout</span> value2: Int)</span></span>&#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"交互前: value1 = \(value1), value2 = \(value2)"</span>)</span><br><span class="line">    <span class="keyword">let</span> temp = value1</span><br><span class="line">    value1 = value2</span><br><span class="line">    value2 = temp</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"交互后: value1 = \(value1), value2 = \(value2)"</span>)</span><br><span class="line">&#125;</span><br><span class="line">  <span class="comment">/** 地址传递,所以值会被修改 */</span></span><br><span class="line">  swap2(&amp;num1, value2: &amp;num2)</span><br><span class="line">  <span class="built_in">print</span>(num1)</span><br><span class="line">  <span class="built_in">print</span>(num2)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>输入输出参数不能有默认值，而且可变参数不能用 inout 标记。如果你用 inout 标记一个参数，这个参数不能被 var 或者 let 标记</p>
+</blockquote>
+<ul>
+<li>可变参数 : 一个可变参数可以接收零个或多个值,如果没有变参函数 , 并且函数的参数个数又不确定那么只能写多个方法或者用将函数参数改为集合,可变参数在函数中可以当做一个数组</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">sum</span><span class="params">(numbers: Int...)</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> sum = <span class="number">0</span></span><br><span class="line">    <span class="comment">/** 其实numbers 在这里就是一个数组 */</span></span><br><span class="line">    <span class="keyword">for</span> number <span class="keyword">in</span> numbers &#123;</span><br><span class="line">        sum += number</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">print</span>(sum)</span><br><span class="line">&#125;</span><br><span class="line">sum5(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意:<br>1 . 一个函数最多只能有一个可变参数<br>2 . 变参只能是同种类型的数据<br>3 . 变参必须指定数据类型<br>4 . 如果函数有一个或多个带默认值的参数，而且还有一个可变参数，那么把可变参数放在参数表的最后</p>
+</blockquote>
+<h2 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h2><hr>
+<p>闭包是自包含的函数代码块，可以在代码中被传递和使用。Swift 中的闭包与 C 和 Objective-C 中的代码块（blocks）以及其他一些编程语言中的匿名函数比较相似 . 闭包可以捕获和存储其所在上下文中任意常量和变量的引用。这就是所谓的闭合并包裹着这些常量和变量，俗称 <code>闭包</code> . 闭包的使用和block一样, 用于保存一段代码, 用作回调, 用作执行耗时操作 . 格式如下 :<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 闭包格式: in关键字的目的是便于区分返回值和执行语句 */</span></span><br><span class="line">&#123;</span><br><span class="line">    (形参列表) -&gt; 返回值类型 <span class="keyword">in</span></span><br><span class="line">        执行语句...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/** 举例 */</span></span><br><span class="line"><span class="keyword">var</span> finish:(()-&gt;()) <span class="comment">// 定义一个无参数无返回值的闭包</span></span><br><span class="line"></span><br><span class="line">finish = &#123;()-&gt;() <span class="keyword">in</span>  <span class="comment">// 给finish闭包赋值</span></span><br><span class="line">  <span class="built_in">print</span>(<span class="string">"已经运行到这里了!"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">finish() <span class="comment">// 使用finish闭包</span></span><br></pre></td></tr></table></figure></p>
+<p>闭包的循环引用问题 : 在OC 中,block会对外部变量进行强引用, 保证执行代码时变量还在 , block中用到self一定要非常小心 .闭包也一样, 会对外部变量进行强引用, 保证执行代码时变量还在.<br>如果您将闭包赋值给一个类实例的属性，并且该闭包通过访问该实例或其成员而捕获了该实例，您将创建一个在闭包和该实例间的循环强引用 , Swift开发中能不写self就不写self, 一看到self就想到闭包.<br>OC与Swift中如何解决循环引用 :<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; OC </span><br><span class="line"><span class="number">1</span> . __<span class="keyword">weak</span> <span class="keyword">typeof</span>(<span class="keyword">self</span>) weakSelf = <span class="keyword">self</span>; </span><br><span class="line"><span class="comment">// 特点: 对象释放后会自动将变量赋值为nil</span></span><br><span class="line"><span class="number">2.</span> __unsafe_unretained <span class="keyword">typeof</span>(<span class="keyword">self</span>) weakSelf = <span class="keyword">self</span>;</span><br><span class="line"><span class="comment">// 特点: 对象释放后不会自动将变量赋值为nil, 指向一块废弃的存储空间</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="type">Swift</span> </span><br><span class="line"><span class="keyword">weak</span> <span class="keyword">var</span> weakSelf = <span class="keyword">self</span></span><br><span class="line"><span class="comment">/* weak 相当于OC中的 __weak, 和OC一样 对象释放后会自动将变量赋值为nil , 所以被weak修饰的变量是可选类型 */</span></span><br><span class="line">        </span><br><span class="line"><span class="keyword">unowned</span> <span class="keyword">var</span> weakSelf = <span class="keyword">self</span></span><br><span class="line"><span class="comment">/* unowned 相当于OC中的__unsafe_unretained, 和OC一样,对象释放后不会自动将变量赋值为nil,所以被unowned修饰的变量, 不是可选类型 */</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意 : <code>weak</code> 和 <code>unowned</code> 只能修饰对象类型, 因为只有对象类型才有引用计数</p>
+</blockquote>
+<p>应用场景 : </p>
+<ul>
+<li>当被保存的对象有可能提前释放时就用 <code>weak</code></li>
+<li>当被保存的对象在使用时不会被提前释放时就用 <code>unowned</code></li>
+</ul>
+<p>捕获列表 : 可以在 <code>调用</code> 闭包时在形参列表前面通过 <code>[]</code> 指定捕获列表, 告诉系统如何处理指定的这些值<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 创建一个无参数无返回值闭包可选类型变量  */</span></span><br><span class="line"><span class="keyword">var</span> callBack: (()-&gt;())?</span><br><span class="line"><span class="comment">/* 创建一个按钮对象  */</span></span><br><span class="line"><span class="keyword">var</span> button: <span class="type">UIButton</span>?</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 在闭包中捕获self还有按钮  */</span></span><br><span class="line">callBack = &#123; [<span class="keyword">unowned</span> <span class="keyword">self</span> ,<span class="keyword">weak</span> btn = <span class="keyword">self</span>.button] () -&gt; () <span class="keyword">in</span></span><br><span class="line">  <span class="keyword">self</span>.view.backgroundColor = <span class="type">UIColor</span>.redColor()</span><br><span class="line">  weakSelf.view.backgroundColor = <span class="type">UIColor</span>.redColor()</span><br><span class="line">  <span class="keyword">self</span>.view.backgroundColor = <span class="type">UIColor</span>.redColor()</span><br><span class="line">  <span class="built_in">print</span>(btn)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 在loadData函数中把闭包callBack当做参数传递 */</span>    </span><br><span class="line">loadData(callBack!)</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Swift/" rel="tag">#Swift</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/21/Swift基础语法之可选类型/" rel="next" title="Swift基础语法之可选类型">
+                <i class="fa fa-chevron-left"></i> Swift基础语法之可选类型
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/04/21/Swift基本语法函数和闭包/"
+     data-title="Swift基本语法函数和闭包"
+     data-content=""
+     data-url="http://sunnylinsd.github.io/2016/04/21/Swift基本语法函数和闭包/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/04/21/Swift基本语法函数和闭包/"
+           data-title="Swift基本语法函数和闭包" data-url="http://sunnylinsd.github.io/2016/04/21/Swift基本语法函数和闭包/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="SunnyLinSD" />
+          <p class="site-author-name" itemprop="name">SunnyLinSD</p>
+          <p class="site-description motion-element" itemprop="description">一件事明明可以做到极致,为什么要止步于过得去呢?</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/SunnyLinSD" target="_blank" title="github">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.weibo.com/1848073753/profile?topnav=1&wvr=6&is_all=1" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#函数"><span class="nav-number">1.</span> <span class="nav-text">函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#闭包"><span class="nav-number">2.</span> <span class="nav-text">闭包</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2013 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">SunnyLinSD</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"sunnylinsd"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      
+      <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

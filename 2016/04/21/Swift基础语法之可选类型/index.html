@@ -80,19 +80,28 @@
 
 
 
-<meta name="description" content="新特性
-可选类型 : Optional ,用于处理值缺失的情况.可选表示“那儿有一个值，并且它等于 x ”或者“那儿没有值”。可选有点像在 Objective-C 中使用nil，但是它可以用在任何类型上，不仅仅是类。可选类型比 Objective-C 中的nil指针更加安全也更具表现力，它是 Swift 许多强大特性的重要组成部分。元组 : Tuple,元组可以让你创建或者传递一组数据，比如作为函">
+<meta name="description" content="前言
+可选类型表示变量可以有值, 也可以没有值, C 和 Objective-C 中并没有可选类型这个概念.在Swift中只有可选类型才可以赋值为 nil ,如果你声明一个可选常量或者变量但是没有赋值，它们会自动被设置为nil.
+
+申明格式 : Optional&amp;lt;类型&amp;gt;  或 在类型后面加上 ? 号
+12345/** 直接使用?号表示可选类型 */var optionalName:St">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Swift基础语法">
-<meta property="og:url" content="http://sunnylinsd.github.io/2016/04/18/Swift基础语法/index.html">
+<meta property="og:title" content="Swift基础语法之可选类型">
+<meta property="og:url" content="http://sunnylinsd.github.io/2016/04/21/Swift基础语法之可选类型/index.html">
 <meta property="og:site_name" content="SunnyLinSD Blog">
-<meta property="og:description" content="新特性
-可选类型 : Optional ,用于处理值缺失的情况.可选表示“那儿有一个值，并且它等于 x ”或者“那儿没有值”。可选有点像在 Objective-C 中使用nil，但是它可以用在任何类型上，不仅仅是类。可选类型比 Objective-C 中的nil指针更加安全也更具表现力，它是 Swift 许多强大特性的重要组成部分。元组 : Tuple,元组可以让你创建或者传递一组数据，比如作为函">
-<meta property="og:updated_time" content="2016-04-18T00:45:57.000Z">
+<meta property="og:description" content="前言
+可选类型表示变量可以有值, 也可以没有值, C 和 Objective-C 中并没有可选类型这个概念.在Swift中只有可选类型才可以赋值为 nil ,如果你声明一个可选常量或者变量但是没有赋值，它们会自动被设置为nil.
+
+申明格式 : Optional&amp;lt;类型&amp;gt;  或 在类型后面加上 ? 号
+12345/** 直接使用?号表示可选类型 */var optionalName:St">
+<meta property="og:updated_time" content="2016-04-21T01:34:40.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Swift基础语法">
-<meta name="twitter:description" content="新特性
-可选类型 : Optional ,用于处理值缺失的情况.可选表示“那儿有一个值，并且它等于 x ”或者“那儿没有值”。可选有点像在 Objective-C 中使用nil，但是它可以用在任何类型上，不仅仅是类。可选类型比 Objective-C 中的nil指针更加安全也更具表现力，它是 Swift 许多强大特性的重要组成部分。元组 : Tuple,元组可以让你创建或者传递一组数据，比如作为函">
+<meta name="twitter:title" content="Swift基础语法之可选类型">
+<meta name="twitter:description" content="前言
+可选类型表示变量可以有值, 也可以没有值, C 和 Objective-C 中并没有可选类型这个概念.在Swift中只有可选类型才可以赋值为 nil ,如果你声明一个可选常量或者变量但是没有赋值，它们会自动被设置为nil.
+
+申明格式 : Optional&amp;lt;类型&amp;gt;  或 在类型后面加上 ? 号
+12345/** 直接使用?号表示可选类型 */var optionalName:St">
 
 
 
@@ -110,7 +119,7 @@
   };
 </script>
 
-  <title> Swift基础语法 | SunnyLinSD Blog </title>
+  <title> Swift基础语法之可选类型 | SunnyLinSD Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -270,7 +279,7 @@
             
             
               
-                Swift基础语法
+                Swift基础语法之可选类型
               
             
           </h1>
@@ -282,8 +291,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-18T08:30:51+08:00" content="2016-04-18 08:30">
-              2016-04-18 08:30
+            <time itemprop="dateCreated" datetime="2016-04-21T09:33:13+08:00" content="2016-04-21 09:33">
+              2016-04-21 09:33
             </time>
           </span>
 
@@ -312,8 +321,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/04/18/Swift基础语法/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/18/Swift基础语法/" itemprop="commentsCount"></span>
+                <a href="/2016/04/21/Swift基础语法之可选类型/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/21/Swift基础语法之可选类型/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -336,32 +345,45 @@
       
 
       
-        <h2 id="新特性"><a href="#新特性" class="headerlink" title="新特性"></a>新特性</h2><hr>
-<p>可选类型 : Optional ,用于处理值缺失的情况.可选表示“那儿有一个值，并且它等于 x ”或者“那儿没有值”。可选有点像在 Objective-C 中使用nil，但是它可以用在任何类型上，不仅仅是类。可选类型比 Objective-C 中的nil指针更加安全也更具表现力，它是 Swift 许多强大特性的重要组成部分。<br>元组 : Tuple,元组可以让你创建或者传递一组数据，比如作为函数的返回值时，你可以用一个元组可以返回多个值。</p>
-<a id="more"></a>
-<h2 id="打印"><a href="#打印" class="headerlink" title="打印"></a>打印</h2><hr>
-<p>打印 <code>Hello World!</code></p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">"Hello World!"</span>);</span><br></pre></td></tr></table></figure>
-<p>在 <code>Swift</code> 中,不需要为输入输出或者字符串处理导入一个单独的库,全局作用域中的代码会被自动当做程序的入口点，所以你也不需要main()函数。你同样不需要在每个语句结尾写上分号。</p>
-<h2 id="简单值"><a href="#简单值" class="headerlink" title="简单值"></a>简单值</h2><hr>
-<p>使用 <code>let</code> 来声明常量，使用 <code>var</code> 来声明变量。一个常量的值，在编译的时候，并不需要有明确的值，但是你只能为它赋值一次 .</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><hr>
+<p>可选类型表示变量可以有值, 也可以没有值, <code>C</code> 和 <code>Objective-C</code> 中并没有可选类型这个概念.在Swift中只有可选类型才可以赋值为 <code>nil</code> ,如果你声明一个可选常量或者变量但是没有赋值，它们会自动被设置为nil.</p>
 <ul>
-<li><p>常量使用场景 : <code>你只需要决定一次，但是需要使用很多次</code> ,在 Swift 中，如果你要处理的值不需要改变，那使用常量可以让你的代码更加安全并且更清晰地表达你的意图</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> constantNumber = <span class="number">10</span></span><br></pre></td></tr></table></figure>
+<li><p>申明格式 : <code>Optional&lt;类型&gt;</code>  或 在类型后面加上 <code>?</code> 号</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** 直接使用?号表示可选类型 */</span></span><br><span class="line"><span class="keyword">var</span> optionalName:<span class="type">String</span>? = <span class="string">"SunnyLinSD"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/** 还可以这么写 */</span></span><br><span class="line"><span class="keyword">var</span> number: <span class="type">Optional</span>&lt;<span class="type">Int</span>&gt;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>变量使用场景 : <code>值会随着程序的运行而发生改变，同时也是可能需要使用很多次</code> </p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> variableNumber = <span class="number">89.2</span></span><br><span class="line">variableNumber = <span class="number">78.8282</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>常量或者变量的类型必须和你赋给它们的值一样。然而，你不用明确地声明类型，声明的同时赋值的话，编译器会自动推断类型。在上面的例子中，编译器推断出 <code>constantNumber</code> 是一个整数（integer）因为它的初始值是整数。</p>
+<li><p>可选类型的取值是一个枚举, <code>None</code> 没有值, <code>Some</code> 有值</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** Optional 类型的枚举声明 */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">enum</span> <span class="title">Optional</span>&lt;<span class="title">Wrapped</span>&gt; : <span class="title">_Reflectable</span>, <span class="title">NilLiteralConvertible</span> </span>&#123;</span><br><span class="line">  <span class="keyword">case</span> <span class="type">None</span></span><br><span class="line">  <span class="keyword">case</span> <span class="type">Some</span>(<span class="type">Wrapped</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>如果初始值没有提供足够的信息（或者没有初始值），那你需要在变量后面声明类型，用冒号分割 :<br>  <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> variableNumber2 : <span class="type">Float</span> = <span class="number">90</span> <span class="comment">// 打印会显示成90.0</span></span><br></pre></td></tr></table></figure></p>
-<p>使用这种方式声明的值永远不会被隐式转换为其他类型.如果需要把一个值转换成其他类型，这时需要显式转换(强制转换) :<br>  <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> variableNumberString = <span class="type">String</span>(variableNumber)</span><br></pre></td></tr></table></figure></p>
-<p>有一种更简单的把值转换成字符串的方法：把值写到括号中，并且在括号之前写一个反斜杠<br>  <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> apple = <span class="number">3</span></span><br><span class="line"><span class="keyword">let</span> orange = <span class="number">5</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> appleMoney = <span class="string">"The Apple is \(apple)"</span></span><br><span class="line"><span class="keyword">let</span> totalMoney = <span class="string">"The Fruit are \(apple + orange)"</span></span><br></pre></td></tr></table></figure></p>
-<h2 id="数组和字典"><a href="#数组和字典" class="headerlink" title="数组和字典"></a>数组和字典</h2><hr>
-<p>使用方括号[]来创建数组和字典，并使用下标或者键（key）来访问元素。最后一个元素后面允许有个逗号<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*创建数组*/</span></span><br><span class="line"><span class="keyword">var</span> fruitArr = [<span class="string">"apple"</span>,<span class="string">"orange"</span>,<span class="string">"bene"</span>,<span class="string">"watermelon"</span>]</span><br><span class="line"><span class="comment">/*根据下标改值*/</span></span><br><span class="line">fruitArr[<span class="number">0</span>] = <span class="string">"瞎写的"</span></span><br><span class="line"><span class="comment">/*根据对象取出下标*/</span></span><br><span class="line">fruitArr.indexOf(<span class="string">"apple"</span>)</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*创建字典*/</span>    </span><br><span class="line"><span class="keyword">let</span> fruitDic = [<span class="string">"apple"</span> : <span class="number">20</span>,<span class="string">"orange"</span>:<span class="number">51</span>]</span><br><span class="line"><span class="comment">/*根据键取值*/</span>     </span><br><span class="line">fruitDic[<span class="string">"orange"</span>]</span><br></pre></td></tr></table></figure>
-<p>创建空数组和空字典<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*创建空数组*/</span></span><br><span class="line"><span class="keyword">var</span> emptyArr = [<span class="type">String</span>]()</span><br><span class="line"><span class="comment">/*创建空字典*/</span></span><br><span class="line"><span class="keyword">var</span> emptyDic = [<span class="type">String</span>:<span class="type">Int</span>]()</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p><code>nil</code> 不能用于非可选的常量和变量。如果你的代码中有常量或者变量需要处理值缺失的情况，请把它们声明成对应的可选类型。<br>Swift 的nil和 Objective-C 中的nil并不一样。在 Objective-C 中，nil是一个指向不存在对象的指针, 所以Objective-C只有对象类型才能被设置为nil(基本类型不行)。在 Swift 中，nil不是指针——它是一个确定的值，用来表示值缺失。任何类型的可选状态都可以被设置为nil，不只是对象类型</p>
+</blockquote>
+<p>Swift中可选类型的值不能当做普通类型的值来使用,如果想使用可选类型的值必须进行解包操作 . 只需要在变量/常量后面加上 <code>!</code> 就可以解包, 解包代表着告诉系统, 该变量/常量中一定有值</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** 申明一个Double的可选类型变量 */</span></span><br><span class="line"><span class="keyword">var</span> number2: <span class="type">Double</span>? = <span class="number">89.0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/** 使用 */</span></span><br><span class="line"><span class="built_in">print</span>(number2!)</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<hr>
+<h2 id="强制解析"><a href="#强制解析" class="headerlink" title="强制解析"></a>强制解析</h2><hr>
+<p>在Swift中,对于Optional类型,我们可以使用 <code>!</code> 来强制解析 ,<code>!</code> 表示告诉编译器一定有值, 编译能够通过, 如果运行时没有值就会直接崩溃<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> url = <span class="type">NSURL</span>(string: <span class="string">"http://www.baidu.com"</span>)</span><br><span class="line"><span class="built_in">print</span>(url) <span class="comment">// "Optional(http://www.baidu.com)\n"</span></span><br><span class="line"><span class="built_in">print</span>(url!) <span class="comment">// "http://www.baidu.com\n"</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="可选绑定（optional-binding）"><a href="#可选绑定（optional-binding）" class="headerlink" title="可选绑定（optional binding）"></a>可选绑定（optional binding）</h2><hr>
+<p>不需要考虑url是否有值, 能进入{}一定有值 , 不仅可以用来判断可选类型中是否有值，同时可以将可选类型中的值赋给一个常量或者变量,可选绑定可以用在if和while语句中</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> url = <span class="type">NSURL</span>(string: <span class="string">"http://www.baidu.com"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">/** 如果temp有值,就为true,然后进入&#123;&#125;中 */</span></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">let</span> temp = url &#123;</span><br><span class="line">    <span class="built_in">print</span>(temp)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="guard"><a href="#guard" class="headerlink" title="guard"></a>guard</h2><hr>
+<p><code>guard</code> 语句是在Swift 2.0中引进的，它是用途是在未满足某个条件时，提供一个退出的路径</p>
+<ul>
+<li><p>格式: guard 表达式 else{}</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">  <span class="function"><span class="keyword">func</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">let</span> value1: <span class="type">Int</span>? = <span class="number">10</span></span><br><span class="line">    <span class="comment">/** guard中的变量/常量 可以在guard后面使用,guard一般用于避免使用强制拆包, 优化代码结构 */</span></span><br><span class="line">    <span class="keyword">guard</span> <span class="keyword">let</span> temp1 = value1 <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">print</span>(temp1)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="隐式解析可选类型"><a href="#隐式解析可选类型" class="headerlink" title="隐式解析可选类型"></a>隐式解析可选类型</h2><hr>
+<p>有时候在程序架构中，第一次被赋值之后，可以确定一个可选类型总会有值。在这种情况下，每次都要判断和解析可选值是非常低效的，因为可以确定它总会有值 . 隐式解析可选类型, 并不需要每次都使用解析来获取可选值, 一个隐式解析可选类型其实就是一个普通类型，但是可以被当做非可选类型来使用</p>
+<ul>
+<li><p>格式: 将可选类型后面的?改为!</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** 创建一个隐式解析可选类型 */</span></span><br><span class="line"><span class="keyword">var</span> doubleValue: <span class="type">Double</span>!</span><br><span class="line"><span class="comment">/** 使用 */</span></span><br><span class="line">doubleValue = <span class="literal">nil</span></span><br><span class="line">doubleValue = <span class="number">3.14</span></span><br><span class="line"><span class="comment">/** 当在使用时一定不能为nil */</span></span><br><span class="line"><span class="built_in">print</span>(doubleValue)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>如果一个变量之后可能变成nil的话请不要使用隐式解析可选类型。如果你需要在变量的生命周期中判断是否是nil的话，请使用普通可选类型</p>
+</blockquote>
 
       
     </div>
@@ -391,17 +413,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/04/15/iOS中关于时间操作/" rel="next" title="iOS中关于时间操作">
-                <i class="fa fa-chevron-left"></i> iOS中关于时间操作
+              <a href="/2016/04/19/iOS中图片的获取与保存/" rel="next" title="iOS中图片的获取与保存">
+                <i class="fa fa-chevron-left"></i> iOS中图片的获取与保存
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/04/18/Swift基础语法之控制流/" rel="prev" title="Swift基础语法之控制流">
-                Swift基础语法之控制流 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -416,10 +434,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/04/18/Swift基础语法/"
-     data-title="Swift基础语法"
+        <div class="ds-share flat" data-thread-key="2016/04/21/Swift基础语法之可选类型/"
+     data-title="Swift基础语法之可选类型"
      data-content=""
-     data-url="http://sunnylinsd.github.io/2016/04/18/Swift基础语法/">
+     data-url="http://sunnylinsd.github.io/2016/04/21/Swift基础语法之可选类型/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -446,8 +464,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/04/18/Swift基础语法/"
-           data-title="Swift基础语法" data-url="http://sunnylinsd.github.io/2016/04/18/Swift基础语法/">
+      <div class="ds-thread" data-thread-key="2016/04/21/Swift基础语法之可选类型/"
+           data-title="Swift基础语法之可选类型" data-url="http://sunnylinsd.github.io/2016/04/21/Swift基础语法之可选类型/">
       </div>
     
   </div>
@@ -558,7 +576,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#新特性"><span class="nav-number">1.</span> <span class="nav-text">新特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#打印"><span class="nav-number">2.</span> <span class="nav-text">打印</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简单值"><span class="nav-number">3.</span> <span class="nav-text">简单值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组和字典"><span class="nav-number">4.</span> <span class="nav-text">数组和字典</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#强制解析"><span class="nav-number">2.</span> <span class="nav-text">强制解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可选绑定（optional-binding）"><span class="nav-number">3.</span> <span class="nav-text">可选绑定（optional binding）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#guard"><span class="nav-number">4.</span> <span class="nav-text">guard</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#隐式解析可选类型"><span class="nav-number">5.</span> <span class="nav-text">隐式解析可选类型</span></a></li></ol></div>
             
           </div>
         </section>
